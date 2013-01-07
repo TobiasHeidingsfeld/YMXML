@@ -13,6 +13,7 @@ YMXML creates a layer that supports all the goodness of MXML with a lighweigth, 
 
 
 YMXML Features=====
+
 - easy to learn. Flex developers can start developing immediatly. You dont even know you are rendering on the GPU until it runs smooth on a mobile device.
 - small, a "Hello World" application rendered on the GPU is 80kb and pure MXML.
 - fast and simple MXML skinning. No 1000 lines long AS3 Skinning Files. 
@@ -24,10 +25,12 @@ YMXML Features=====
 - a lot more yet to come.
 
 YMXML Demo=====
+
 coming Soon
 
 
 YMXML important Notes=====
+
 1. Compile with "-static-link-runtime-shared-libraries=true"
 2. As the first namespace always use 'xmlns:fx="http://ns.adobe.com/mxml/2009"' NOT the MX namespace or adding children will fail silently. If someone knows why please let me know :)
 
