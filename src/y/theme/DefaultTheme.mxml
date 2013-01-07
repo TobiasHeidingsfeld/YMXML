@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme:YTheme xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:theme="y.theme.*">
+	<fx:Script>
+		<![CDATA[
+			import feathers.controls.Label;
+			import feathers.controls.Slider;
+			import feathers.controls.ProgressBar;
+			import feathers.controls.Button;
+			import feathers.controls.TextInput;
+		]]>
+	</fx:Script>
+	<theme:SkinSettings forClass="{Button}">
+		<theme:SkinRoundRect skinName="defaultSkin"/>
+		<theme:SkinRoundRect skinName="hoverSkin" color="0xDDDDDD"/>
+		<theme:SkinRoundRect skinName="downSkin" color="0xBBBBBB"/>
+		<theme:SkinTextFormat textPropertiesName="defaultLabelProperties"/>
+		<theme:SkinPadding/>
+	</theme:SkinSettings>
+
+	<theme:SkinSettings forClass="{Label}">
+		<theme:SkinTextFormat textPropertiesName="textRendererProperties"
+			size="16"/>
+	</theme:SkinSettings>
+
+	<theme:SkinSettings forClass="{TextInput}">
+		<theme:SkinRoundRect skinName="backgroundSkin"/>
+		<theme:SkinRoundRect skinName="backgroundDisabledSkin" color="0xBBBBBB"/>
+		<theme:SkinTextFormat textPropertiesName="textEditorProperties"
+			size="50"/>
+		<theme:SkinNumericProperty property="minWidth" value="100"/>
+		<theme:SkinNumericProperty property="minHeight" value="30"/>
+		<theme:SkinPadding/>
+	</theme:SkinSettings>
+
+	<theme:SkinSettings forClass="{ProgressBar}">
+		<theme:SkinRoundRect skinName="backgroundSkin"/>
+		<theme:SkinRoundRect skinName="fillSkin" color="0x008000"
+			borderThickness="0"/>
+		<theme:SkinNumericProperty property="minWidth" value="100"/>
+		<theme:SkinNumericProperty property="minHeight" value="30"/>
+		<theme:SkinPadding value="1"/>
+	</theme:SkinSettings>
+
+	<theme:SkinSettings forClass="{Slider}">
+		<theme:SkinSubComponent name="thumbProperties">
+			<theme:SkinRoundRect skinName="defaultSkin"/>
+			<theme:SkinRoundRect skinName="hoverSkin" color="0xDDDDDD"/>
+			<theme:SkinRoundRect skinName="downSkin" color="0xBBBBBB"/>
+		</theme:SkinSubComponent>
+		<theme:SkinNumericProperty property="minWidth" value="100"/>
+		<theme:SkinNumericProperty property="minHeight" value="30"/>
+	</theme:SkinSettings>
+</theme:YTheme>
