@@ -1,6 +1,5 @@
 YMXML
-
-==============
+======
 
 YMXML is an AS3/MXML Framework allowing quick development with GPU accelerated Rendering (Stage3D). It is based on Starling and Feathers. Flex developers will feel home in minutes. YMXML give you way faster loading times and runtime rendering thanks to GPU acceleration and a true light weight framework then Flex.
 
@@ -31,7 +30,7 @@ YMXML Features
 YMXML Demo
 ==============
 
-coming Soon
+Coming Soon
 
 
 YMXML important Notes
