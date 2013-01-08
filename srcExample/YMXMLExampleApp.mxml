@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<y:YApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                xmlns:y="y.controls.*"
+                xmlns:theme="y.theme.*"
+                xmlns:local="*"
+                fixedWidth="900"
+                fixedHeight="500"
+                context3DCreate="currentViewCode = new code()">
+	<fx:Metadata>
+		[SWF(backgroundColor="#FFFF00", frameRate="40", width="900", height="500")]
+	</fx:Metadata>
+	<fx:Declarations>
+		<fx:Class id="code">@Embed(source='YMXMLExampleApp.mxml', mimeType='application/octet-stream')</fx:Class>
+		<fx:String id="currentViewCode"/>
+		<fx:String id="lineReplace">{"\r"}</fx:String>
+	</fx:Declarations>
+	<y:theme>
+		<theme:DefaultTheme/>
+	</y:theme>
+	<y:YVGroup width="400">
+		<y:YLabel text="YMXML Demo"
+		          fontSize="30"/>
+		<y:YButton label="Databinding"
+		           click="currentViewCode = new db.code()"/>
+		<y:YButton label="Skinning"/>
+		<y:YButton label="Events"/>
+	</y:YVGroup>
+	<y:YSprite id="views">
+		<local:DatabindingView id="db"/>
+	</y:YSprite>
+	<y:YGroup x="400" scrollable="true" width="400">
+		<y:YLabel text='{currentViewCode.split(lineReplace).join("")}'
+		          fontSize="10"/>
+	</y:YGroup>
+
+</y:YApplication>

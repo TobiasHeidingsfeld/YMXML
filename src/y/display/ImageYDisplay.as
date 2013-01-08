@@ -1,5 +1,6 @@
 package y.display
 {
+	import y.controls.YApplication;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -49,12 +50,13 @@ package y.display
 			if (Starling.current && Starling.current.context)
 				setTimeout(createDisplay, 1);
 			else
-				Starling.current.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
+				YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
+			//Starling.current.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
 		}
 
-		private function handleContextCreated(event : Event) : void
+		private function handleContextCreated(event : *) : void
 		{
-			Starling.current.removeEventListener(event.type, handleContextCreated);
+			YApplication.instance.removeEventListener(event["type"], handleContextCreated);
 			createDisplay();
 		}
 

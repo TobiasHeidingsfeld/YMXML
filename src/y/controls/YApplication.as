@@ -11,7 +11,7 @@ package y.controls
 
 
 	[DefaultProperty("mxmlContent")]
-	[Event(name="Context3DCreated", type="flash.events.Event")]
+	[Event(name="context3DCreate", type="flash.events.Event")]
 	public class YApplication extends flash.display.Sprite
 	{
 		public static var instance : YApplication;
@@ -57,7 +57,7 @@ package y.controls
 			for each (var item : YSprite in _content)
 				starlingRoot.addChild(item.getUIE());
 
-			dispatchEvent(new Event("Context3DCreated"));
+			dispatchEvent(new Event("context3DCreate"));
 
 			addEventListener(Event.DEACTIVATE, handleActiveChange);
 			addEventListener(Event.ACTIVATE, handleActiveChange);
