@@ -4,8 +4,6 @@ package y.controls
 	import flash.filters.GlowFilter;
 	import y.util.TextFormatHelper;
 
-
-
 	public class YLabel extends YSprite
 	{		
 		override protected function createUIE() : void
