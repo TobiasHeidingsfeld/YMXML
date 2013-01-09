@@ -4,7 +4,6 @@ package y.controls
 
 	public class YPopup extends YGroup
 	{
-		private var _displayPopup : Boolean;
 		public var modal : Boolean = true;
 		
 		override protected function createUIE() : void
@@ -13,6 +12,8 @@ package y.controls
 			visible = false;
 		}
 		
+		private var _displayPopup : Boolean;
+				
 		public function get displayPopup() : Boolean
 		{
 			return _displayPopup;

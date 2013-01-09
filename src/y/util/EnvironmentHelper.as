@@ -13,12 +13,12 @@ package y.util
 
 		public static function get width() : Number
 		{
-			return isAir ? YApplication.instance.stage.fullScreenWidth : YApplication.instance.fixedWidth;
+			return isAir ? YApplication.instance.stage.fullScreenWidth : YApplication.instance.stage.stageWidth;
 		}
 		
 		public static function get height() : Number
 		{
-			return isAir ? YApplication.instance.stage.fullScreenHeight : YApplication.instance.fixedHeight;
+			return isAir ? YApplication.instance.stage.fullScreenHeight : YApplication.instance.stage.stageHeight;
 		}
 	}
 }

@@ -1,14 +1,15 @@
 package y.controls
 {
-	import flash.display.Sprite;
-	import flash.display.StageQuality;
-	import flash.events.Event;
-	import flash.geom.Rectangle;
 	import starling.core.Starling;
+
 	import y.theme.YTheme;
 	import y.util.EnvironmentHelper;
 
-
+	import flash.display.Sprite;
+	import flash.display.StageQuality;
+	import flash.display.StageScaleMode;
+	import flash.events.Event;
+	import flash.geom.Rectangle;
 
 	[DefaultProperty("mxmlContent")]
 	[Event(name="context3DCreate", type="flash.events.Event")]
@@ -17,10 +18,10 @@ package y.controls
 		public static var instance : YApplication;
 		public var starling : Starling;
 		public var starlingRoot : FeathersRoot;
-		public var fixedWidth : Number = 400;
-		public var fixedHeight : Number = 400;
-		public var paddingTop : Number = 0;
 		public var theme : YTheme = new YTheme();
+		private var fixedWidth : Number;
+		private var fixedHeight : Number;
+		private var _paddingTop : Number = 0;
 		
 		public function YApplication()
 		{
@@ -35,6 +36,9 @@ package y.controls
 
 		private function initApplication(event : Event) : void
 		{
+			fixedWidth = stage.stageWidth;
+			fixedHeight = stage.stageHeight;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.quality = StageQuality.LOW;
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
@@ -46,11 +50,8 @@ package y.controls
 
 		private function contextCreated(event : Object) : void
 		{
-			starlingRoot = FeathersRoot.instance;
+			setViewPort();
 			
-			var scale : Number = Math.min(EnvironmentHelper.width / fixedWidth, (EnvironmentHelper.height - paddingTop) / fixedHeight);
-			starling.viewPort = new Rectangle(0, paddingTop, fixedWidth * scale, fixedHeight * scale);
-
 			if (theme)
 				theme.apply();			
 			
@@ -63,6 +64,12 @@ package y.controls
 			addEventListener(Event.ACTIVATE, handleActiveChange);
 			
 			event;			
+		}
+
+		protected function setViewPort() : void
+		{
+			var scale : Number = Math.min(EnvironmentHelper.width / fixedWidth, (EnvironmentHelper.height - paddingTop) / fixedHeight);
+			starling.viewPort = new Rectangle(0, paddingTop, fixedWidth * scale, fixedHeight * scale);			
 		}
 
 		private function handleActiveChange(event : Event) : void
@@ -96,19 +103,28 @@ package y.controls
 		{
 			starling.showStats = value;
 		}
+
+		public function get paddingTop() : Number
+		{
+			return _paddingTop;
+		}
+
+		public function set paddingTop(paddingTop : Number) : void
+		{
+			this._paddingTop = paddingTop;
+			setViewPort();
+		}
 	}
 }
 import starling.display.Sprite;
-
 import flash.utils.setTimeout;
+import y.controls.YApplication;
 
 class FeathersRoot extends Sprite
 {
-	public static var instance : FeathersRoot;
-
 	public function FeathersRoot()
 	{
-		instance = this;
+		YApplication.instance.starlingRoot = this;
 		visible = false;
 		setTimeout(show, 100);
 	}

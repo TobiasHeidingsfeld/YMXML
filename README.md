@@ -1,21 +1,23 @@
 YMXML
 ======
 
-YMXML is an AS3/MXML Framework allowing quick development with GPU accelerated Rendering (Stage3D). It is based on Starling and Feathers. Flex developers will feel home in minutes. YMXML give you way faster loading times and runtime rendering thanks to GPU acceleration and a true light weight framework then Flex.
+YMXML is an AS3/MXML Framework allowing quick development with GPU accelerated Rendering (Stage3D). Flex developers will feel home in minutes. YMXML gives you way faster loading times and runtime rendering then Flex thanks to GPU acceleration and a true light weight framework. 
+
+It is based on Starling and Feathers.
 
 
 Why MXML (with GPU/Starling)?
-==============
+-----------
 
-In my opinion MXML is the best markup language i have seen. MXML might be the best thing Adobe ever made for developers. MXML allows for writing a GUI in about 50% the LOC and 300% the readability/maintainability as pure AS3. Its Databinding is easier and better then what Microsoft did with XAML/WPF. The integration with AS3 a breeze. MXML files just compiles down to standart AS3 Class.
+In my opinion MXML is the best markup language. Writing a GUI in MXML is about 50% the LOC and 300% the readability/maintainability as pure AS3. Databinding saves large amounts of time. The integration with AS3 is a breeze. MXML files just compile down to standard AS3 Classes.
 
-As of now MXML was more or less coupled to Flex. Flex has a huge amount of features. But it produces relativly large and slow applications. Flex does not support GPU rendering. For Mobile Flex is just rarely a good choice.
+As of now MXML was more or less coupled to Flex. Flex has a huge amount of features. But it produces relativly large and slow applications. Flex does not support GPU rendering. For Mobile Apps Flex is just rarely a good choice.
 
-YMXML creates a layer that supports all the goodness of MXML with a lighweigth, fast framework based on Starling and Feathers for GPU Rendering, small file sizes and fast loading.
+YMXML creates a layer that supports all the goodness of MXML with a lighweigth, fast framework based on Starling and Feathers for GPU Rendering, small file sizes and fast loading. Crossplattform development with AIR now got really easy.
 
 
 YMXML Features
-==============
+-----------
 
 - easy to learn. Flex developers can start developing immediatly. You dont even know you are rendering on the GPU until it runs smooth on a mobile device.
 - small, a "Hello World" application rendered on the GPU is 80kb and pure MXML.
@@ -28,16 +30,16 @@ YMXML Features
 - a lot more yet to come.
 
 YMXML Demo
-==============
+-----------
 
 Coming Soon
 
 
 YMXML important Notes
-==============
+-----------
 
 1. Compile with "-static-link-runtime-shared-libraries=true"
-2. As the first namespace always use 'xmlns:fx="http://ns.adobe.com/mxml/2009"' NOT the MX namespace or adding children will fail silently. If someone knows why please let me know :)
+2. As the first namespace in every .mxml file always use 'xmlns:fx="http://ns.adobe.com/mxml/2009"' NOT the MX namespace or adding children will fail silently. If someone knows why please let me know :)
 
 YMXML is still Alpha, there is no documentation yet
 ==============
