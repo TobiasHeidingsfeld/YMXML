@@ -7,7 +7,6 @@ package y.controls
 
 	import flash.display.Sprite;
 	import flash.display.StageQuality;
-	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 
@@ -38,7 +37,6 @@ package y.controls
 		{
 			fixedWidth = stage.stageWidth;
 			fixedHeight = stage.stageHeight;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.quality = StageQuality.LOW;
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = true;
@@ -117,8 +115,10 @@ package y.controls
 	}
 }
 import starling.display.Sprite;
-import flash.utils.setTimeout;
+
 import y.controls.YApplication;
+
+import flash.utils.setTimeout;
 
 class FeathersRoot extends Sprite
 {

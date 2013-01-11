@@ -4,7 +4,7 @@ package y.controls
 
 	public class YVGroup extends YGroup
 	{
-		private var vLayout : VerticalLayout = new VerticalLayout();
+		protected var vLayout : VerticalLayout = new VerticalLayout();
 		
 		override protected function createUIE() : void
 		{

@@ -27,6 +27,7 @@ package y.controls
 		public var transitionDelay : int;
 		protected var uie : Sprite;
 		protected var _content : Array;
+		protected var overridePreviousMXMLContent : Boolean = true;
 				
 		public function YSprite()
 		{
@@ -58,7 +59,8 @@ package y.controls
 		
 		public function set mxmlContent(content : Array) : void
 		{
-			uie.removeChildren();
+			if(overridePreviousMXMLContent)
+				uie.removeChildren();
 			_content = content;
 			for each (var item : YSprite in content) 
 					addChild(item);
