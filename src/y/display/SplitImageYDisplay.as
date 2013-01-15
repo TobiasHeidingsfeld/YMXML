@@ -23,6 +23,7 @@ package y.display
 
 		override protected function createImage() : void
 		{
+			removeChildren();
 			_images = [];
 			var texture : Texture = DynamicTextureAtlas.instance.getTexture(_textureAtlasName);
 			for each (var split : Rectangle in _imageSplits)

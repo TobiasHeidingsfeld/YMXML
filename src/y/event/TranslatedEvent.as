@@ -21,6 +21,8 @@ package y.event
 		
 		new TranslatedEvent(starling.events.Event.ADDED_TO_STAGE, flash.events.Event.ADDED_TO_STAGE);
 		
+		new TranslatedEvent(starling.events.Event.REMOVED_FROM_STAGE, flash.events.Event.REMOVED_FROM_STAGE);
+		
 		new TranslatedEvent(starling.events.Event.CHANGE, flash.events.Event.CHANGE);
 		
 		new TranslatedEvent(starling.events.Event.TRIGGERED, MouseEvent.CLICK, function(event : starling.events.Event) : Object

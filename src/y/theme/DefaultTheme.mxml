@@ -3,6 +3,7 @@
               xmlns:theme="y.theme.*">
 	<fx:Script>
 		<![CDATA[
+			import y.display.PanelDisplay;
 			import feathers.controls.Label;
 			import feathers.controls.Slider;
 			import feathers.controls.ProgressBar;
@@ -18,6 +19,10 @@
 		                     color="0xBBBBBB"/>
 		<theme:SkinTextFormat textPropertiesName="defaultLabelProperties"/>
 		<theme:SkinPadding/>
+	</theme:SkinSettings>
+	
+	<theme:SkinSettings forClass="{PanelDisplay}">
+		<theme:SkinRoundRect skinName="backgroundSkin"/>		
 	</theme:SkinSettings>
 
 	<theme:SkinSettings forClass="{Label}">

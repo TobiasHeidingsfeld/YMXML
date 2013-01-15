@@ -1,6 +1,7 @@
 package y.display
 {
 	import y.controls.YApplication;
+
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -17,14 +18,14 @@ package y.display
 		protected var _imageWidth : Number;
 		protected var _imageHeight : Number;
 		protected var _textureAtlasName : String;
-		
+
 		public function set source(value : Object) : void
 		{
 			_source = value;
 			if (value is String)
-			{				
+			{
 				var string : String = value as String;
-				if(DynamicTextureAtlas.instance.getTexture(string))
+				if (DynamicTextureAtlas.instance.getTexture(string))
 				{
 					_textureAtlasName = string;
 					createImageIfReady();
@@ -37,21 +38,19 @@ package y.display
 				_textureAtlasName = DynamicTextureAtlas.instance.addEmbeddedImage(_source);
 				createImageIfReady();
 			}
-				
 		}
 
 		public function get source() : Object
 		{
 			return _source;
 		}
-		
+
 		private function createImageIfReady() : void
-		{					
+		{
 			if (Starling.current && Starling.current.context)
 				setTimeout(createDisplay, 1);
 			else
 				YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
-			//Starling.current.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
 		}
 
 		private function handleContextCreated(event : *) : void
@@ -61,30 +60,31 @@ package y.display
 		}
 
 		protected function createDisplay() : void
-		{	
+		{
 			if (_image != null)
 			{
 				removeChild(_image);
 				_image = null;
 			}
-			
-			if(_textureAtlasName == null)
+
+			if (_textureAtlasName == null)
 				return;
-						
-			createImage();		
-			
+
+			createImage();
+
 			if (!isNaN(_imageWidth))
 				width = _imageWidth;
 			if (!isNaN(_imageHeight))
-				height = _imageHeight;					
+				height = _imageHeight;
 		}
 
 		protected function createImage() : void
 		{
-			_image = new Image(DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
-						
-			//_image.smoothing = TextureSmoothing.TRILINEAR; 
-			addChild(_image);
+			if (_textureAtlasName != null && _textureAtlasName != "")
+			{
+				_image = new Image(DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
+				addChild(_image);
+			}
 		}
 
 		override public function set width(value : Number) : void
@@ -92,7 +92,7 @@ package y.display
 			if (_image != null)
 				_image.width = value;
 			super.width = value;
-			_imageWidth = value;			
+			_imageWidth = value;
 		}
 
 		override public function set height(value : Number) : void
@@ -101,7 +101,6 @@ package y.display
 				_image.height = value;
 			super.height = value;
 			_imageHeight = value;
-			
 		}
 	}
 }

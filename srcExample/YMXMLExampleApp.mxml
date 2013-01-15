@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <y:YApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:y="y.controls.*" xmlns:theme="y.theme.*" xmlns:local="*" context3DCreate="currentViewCode = new code()">
-	<fx:Script>
+	<y:Script>
 		<![CDATA[
 			private function showView(viewClass : Class) : void
 			{
@@ -14,7 +14,7 @@
 
 			private const carriageReturn : String = "\r";
 		]]>
-	</fx:Script>
+	</y:Script>
 	<fx:Metadata>
 		[SWF(backgroundColor="#FFFFFF", frameRate="40", width="900", height="500")]
 	</fx:Metadata>
@@ -39,5 +39,4 @@
 		<!--<y:YTextInput text='{currentViewCode.split(carriageReturn).join("")}' fontSize="10" width="500" height="500"/>-->
 		<y:YLabel text='{currentViewCode.split(carriageReturn).join("")}' fontSize="10"/>
 	</y:YGroup>
-
 </y:YApplication>

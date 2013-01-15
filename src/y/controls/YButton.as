@@ -17,7 +17,10 @@ package y.controls
 		
 		public function get label():String { return t.label; }
 		public function set label(value:String):void { t.label = value;}
-
+		
+		//public function get icon():Object { return t.defaultIcon; }
+		//public function set icon(value:Object):void { t.defaultIcon = value;}
+		
 		public function get enabled():Boolean { return t.isEnabled; }
 		public function set enabled(value:Boolean):void { t.isEnabled = value;}
 		

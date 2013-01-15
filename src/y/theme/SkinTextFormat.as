@@ -1,5 +1,6 @@
 package y.theme
 {
+	import flash.filters.GlowFilter;
 	import flash.text.TextFormat;
 
 	public class SkinTextFormat implements ISkinSetting
@@ -8,6 +9,7 @@ package y.theme
 		public var font : String = "defaultFont";
 		public var size : int = 20;
 		public var color : int = 0;
+		public var outline : int = int.MIN_VALUE;
 		private var _textFormat : TextFormat;
 		
 		public function initialize() : void
@@ -32,6 +34,8 @@ package y.theme
 			}
 			else
 				item[textPropertiesName]["textFormat"] = _textFormat;
+			if(outline != int.MIN_VALUE)
+			 	item[textPropertiesName]["filters"] = [new GlowFilter(outline, 1, 6, 6, 10)];
 		}
 	}
 }
