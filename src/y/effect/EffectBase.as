@@ -13,7 +13,7 @@ package y.effect
 		public var delay : int = 0;
 		public var reverse : Boolean;
 		public var repeatCount : int = 1;
-		public var transition : String = Transitions.EASE_IN;
+		public var transition : String = Transitions.LINEAR;
 		protected var tween : Tween;
 		protected var _autoPlay : Boolean;
 		
@@ -23,10 +23,10 @@ package y.effect
 		{
 			if(target == null)
 				return;
-			if(tween && removeOldTween)
+			if(tween && !tween.isComplete && removeOldTween)
 				Starling.juggler.remove(tween);
 			tween = new Tween(target, duration / 1000, transition);
-			tween.reverse = reverse;
+			//tween.reverse = reverse;
 			//tween.repeatCount = repeatCount;
 			tween.delay = delay / 1000;
 			addTweens();

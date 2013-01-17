@@ -39,7 +39,7 @@ package y.theme
 			for each (var entry : DTAEntry in _entries)
 			{
 				i++;
-				if (x + entry.bitmapData.width > MAX_TEXTURE_WIDTH)
+				if (x + entry.bitmapData.width + 1 > MAX_TEXTURE_WIDTH)
 				{
 					x = 0;
 					y = maxY + 1;
@@ -62,7 +62,6 @@ package y.theme
 				destination.setTo(entry.atlasUsedRectangle.x, entry.atlasUsedRectangle.y);
 				finalBitmap.copyPixels(entry.bitmapData, entry.bitmapData.rect, destination);
 			}
-			
 			//trace("[YMXML] bitmap creation:" + (getTimer() - start) + "ms");
 			
 			textureAtlas = new TextureAtlas(Texture.fromBitmapData(finalBitmap));

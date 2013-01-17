@@ -1,8 +1,10 @@
 package y.controls
 {
 	import feathers.controls.Label;
-	import flash.filters.GlowFilter;
+
 	import y.util.TextFormatHelper;
+
+	import flash.filters.GlowFilter;
 
 	public class YLabel extends YSprite
 	{		

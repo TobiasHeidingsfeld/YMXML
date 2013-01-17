@@ -8,8 +8,6 @@ package y.controls
 	import mx.events.CollectionEvent;
 	import mx.events.CollectionEventKind;
 
-
-	
 	public class YDatagroup extends YGroup
 	{
 		public var removeEffect : EffectBase;
