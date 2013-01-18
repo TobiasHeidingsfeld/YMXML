@@ -39,9 +39,9 @@ package y.controls
 			fixedHeight = stage.stageHeight;
 			stage.quality = StageQuality.LOW;
 			Starling.multitouchEnabled = true;
-			Starling.handleLostContext = true;
+			Starling.handleLostContext = EnvironmentHelper.isiOS;
 			starling = new Starling(FeathersRoot, stage);
-			starling.addEventListener("rootCreated", contextCreated);
+			starling.addEventListener("rootCreated", contextCreated);			
 			starling.start();
 			starling.simulateMultitouch = true;			
 		}

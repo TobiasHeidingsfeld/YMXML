@@ -10,6 +10,11 @@ package y.util
 		{
 			return Capabilities.playerType == "Desktop";
 		}
+		
+		public static function get isiOS(): Boolean
+		{
+			return isAir && Capabilities.manufacturer.indexOf("iOS") != -1;
+		}
 
 		public static function get width() : Number
 		{
