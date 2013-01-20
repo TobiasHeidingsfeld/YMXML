@@ -41,11 +41,16 @@ package y.event
 			return new flash.events.KeyboardEvent(flash.events.KeyboardEvent.KEY_UP, true, false, event.charCode, event.keyCode, event.keyLocation, event.ctrlKey, event.altKey, event.shiftKey);
 		});
 		
-		new TranslatedEvent(TouchEvent.TOUCH, DragEvent.DRAG, function(event : TouchEvent) : Object
+		new TranslatedEvent(TouchEvent.TOUCH, TranslatedTouchEvent.DRAG, function(event : TouchEvent) : Object
 		{
 			if (event.touches[0].phase == TouchPhase.MOVED)
-				return new DragEvent(event);
+				return new TranslatedTouchEvent(TranslatedTouchEvent.DRAG ,event);
 			return null;
+		});
+		
+		new TranslatedEvent(TouchEvent.TOUCH, TranslatedTouchEvent.TOUCH, function(event : TouchEvent) : Object
+		{
+			return new TranslatedTouchEvent(TranslatedTouchEvent.TOUCH ,event);			
 		});
 		
 		new TranslatedEvent(TouchEvent.TOUCH, MouseEvent.MOUSE_OVER, function(event : TouchEvent, state : *) : Object

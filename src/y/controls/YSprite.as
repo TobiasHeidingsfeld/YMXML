@@ -20,7 +20,8 @@ package y.controls
 	[Event(name="removedFromStage", type="flash.events.Event")]
 	[Event(name="keyDown", type="flash.events.KeyboardEvent")]
 	[Event(name="keyUp", type="flash.events.KeyboardEvent")]
-	[Event(name="drag", type="y.event.DragEvent")]	
+	[Event(name="drag", type="y.event.TranslatedTouchEvent")]
+	[Event(name="touch", type="y.event.TranslatedTouchEvent")]	
 	public class YSprite extends EventDispatcher
 	{
 		public var transitionDuration : int;

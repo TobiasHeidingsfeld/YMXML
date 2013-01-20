@@ -40,10 +40,10 @@ package y.controls
 			stage.quality = StageQuality.LOW;
 			Starling.multitouchEnabled = true;
 			Starling.handleLostContext = EnvironmentHelper.isiOS;
+			
 			starling = new Starling(FeathersRoot, stage);
-			starling.addEventListener("rootCreated", contextCreated);			
-			starling.start();
-			starling.simulateMultitouch = true;			
+			starling.addEventListener("rootCreated", contextCreated);		
+			starling.start();			
 		}
 
 		private function contextCreated(event : Object) : void
@@ -99,7 +99,8 @@ package y.controls
 
 		public function set showStats(value : Boolean) : void
 		{
-			starling.showStats = value;
+			if(starling)
+				starling.showStats = value;
 		}
 
 		public function get paddingTop() : Number

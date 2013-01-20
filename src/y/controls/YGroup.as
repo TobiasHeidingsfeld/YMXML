@@ -1,9 +1,10 @@
 package y.controls
 {
-	import y.util.EnvironmentHelper;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.layout.ILayout;
+
+	import y.util.EnvironmentHelper;
 
 	public class YGroup extends YSprite
 	{
@@ -36,6 +37,8 @@ package y.controls
 		public function set desktopScrollers(value:Boolean):void 
 		{ 
 			t.scrollerProperties["scrollBarDisplayMode"] = value ? Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED : Scroller.SCROLL_BAR_DISPLAY_MODE_FLOAT;
+			t.scrollerProperties["hasElasticEdges"] = !value;
+			t.scrollerProperties["interactionMode"] = value ? Scroller.INTERACTION_MODE_MOUSE : Scroller.INTERACTION_MODE_TOUCH;
 		}
 	}
 }

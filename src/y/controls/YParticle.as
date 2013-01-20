@@ -21,7 +21,7 @@ package y.controls
 
 		public function start(duration : Number = Number.MAX_VALUE) : void
 		{
-			_particleSystem.start(duration);
+			_particleSystem.start(duration / 1000);
 		}
 
 		private function updateParticleSystem() : void
