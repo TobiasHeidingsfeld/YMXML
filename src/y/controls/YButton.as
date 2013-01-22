@@ -21,9 +21,16 @@ package y.controls
 		//public function get icon():Object { return t.defaultIcon; }
 		//public function set icon(value:Object):void { t.defaultIcon = value;}
 		
+		public function get wordWrap():Boolean { return t.defaultLabelProperties["wordWrap"]; }
+		public function set wordWrap(value:Boolean):void { t.defaultLabelProperties["wordWrap"] = value;}
+		
 		public function get enabled():Boolean { return t.isEnabled; }
 		public function set enabled(value:Boolean):void { t.isEnabled = value;}
 		
-		public function set fontSize(value:Number):void { TextFormatHelper.setFontSize(t.defaultLabelProperties, value);}		
+		public function set fontSize(value:Number):void { TextFormatHelper.setFontSize(t.defaultLabelProperties, value);}
+		
+		public function set fontColor(value : Number) : void	{ TextFormatHelper.setFontColor(t.defaultLabelProperties, value);}
+		
+		public function set fontAlign(value : String) : void { TextFormatHelper.setFontAlign(t.defaultLabelProperties, value);}		
 	}
 }
