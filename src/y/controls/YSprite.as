@@ -105,6 +105,9 @@ package y.controls
 		public function get visible():Boolean { return uie.visible; }
 		public function set visible(value:Boolean):void { uie.visible = value;}
 		
+		public function get useHandCursor():Boolean { return uie.useHandCursor; }
+		public function set useHandCursor(value:Boolean):void { uie.useHandCursor = value;}
+		
 		public function get touchable():Boolean { return uie.touchable; }
 		public function set touchable(value:Boolean):void { uie.touchable = value;}
 		

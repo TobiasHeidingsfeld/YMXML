@@ -26,8 +26,8 @@ package y.effect
 			if(tween && !tween.isComplete && removeOldTween)
 				Starling.juggler.remove(tween);
 			tween = new Tween(target, duration / 1000, transition);
-			//tween.reverse = reverse;
-			//tween.repeatCount = repeatCount;
+			tween.reverse = reverse;
+			tween.repeatCount = repeatCount;
 			tween.delay = delay / 1000;
 			addTweens();
 			Starling.juggler.add(tween);			
