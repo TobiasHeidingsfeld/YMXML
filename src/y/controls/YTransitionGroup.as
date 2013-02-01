@@ -1,8 +1,10 @@
 package y.controls
 {
-	import flash.utils.setTimeout;
+	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
+
+	import flash.utils.setTimeout;
 
 
 	public class YTransitionGroup extends YGroup
@@ -22,6 +24,7 @@ package y.controls
 			{
 				tween.moveTo(-480, y);
 			}
+			tween.transition = Transitions.EASE_IN_OUT;
 			if(Starling.juggler != null)
 				Starling.juggler.add(tween);
 			setTimeout(function() : void

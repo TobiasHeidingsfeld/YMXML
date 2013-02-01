@@ -64,7 +64,7 @@ package y.theme
 			}
 			//trace("[YMXML] bitmap creation:" + (getTimer() - start) + "ms");
 			
-			textureAtlas = new TextureAtlas(Texture.fromBitmapData(finalBitmap));
+			textureAtlas = new TextureAtlas(Texture.fromBitmapData(finalBitmap, false));
 
 			//trace("[YMXML] texture upload:" + (getTimer() - start) + "ms");
 			
