@@ -1,17 +1,18 @@
 package y.controls
 {
+	import flash.events.Event;
 	import starling.core.Starling;
 	import starling.extensions.PDParticleSystem;
+	import y.util.DynamicTextureAtlas;
 
-	import y.theme.DynamicTextureAtlas;
 
-	import flash.events.Event;
 
 	public class YParticle extends YSprite
-	{
+	{		
 		private var _particleSystem : PDParticleSystem;
 		private var _config : Object;
 		private var _textureAtlasName : String;
+		private var _running : Boolean;
 		
 		public function YParticle()
 		{
@@ -26,7 +27,6 @@ package y.controls
 
 		private function updateParticleSystem() : void
 		{
-			trace(_textureAtlasName + " " + _config);
 			if (_particleSystem)
 			{
 				uie.removeChild(_particleSystem);
@@ -37,6 +37,7 @@ package y.controls
 				if (Starling.current && Starling.current.context)
 				{
 					_particleSystem = new PDParticleSystem(XML(new (_config)()), DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
+					running = _running;
 					uie.addChild(_particleSystem);
 					Starling.juggler.add(_particleSystem);
 					start();
@@ -70,6 +71,7 @@ package y.controls
 				_particleSystem.start();
 			if(_particleSystem && !running)
 				_particleSystem.stop();
+			_running = running;
 		}
 
 		public function get system() : PDParticleSystem

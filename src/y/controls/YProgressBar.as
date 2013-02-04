@@ -21,5 +21,8 @@ package y.controls
 		public function get minimum():Number { return t.minimum; }
 		public function set minimum(value:Number):void { t.minimum = value;}
 		
+		public function get vertical():Boolean { return t.direction == ProgressBar.DIRECTION_VERTICAL; }
+		public function set vertical(value:Boolean):void { t.direction = value ? ProgressBar.DIRECTION_VERTICAL : ProgressBar.DIRECTION_HORIZONTAL;}
+		
 	}
 }

@@ -1,6 +1,7 @@
 package y.theme
 {
 	import starling.display.Image;
+	import y.util.DynamicTextureAtlas;
 
 	public class SkinTextureAtlasImage implements ISkinSetting
 	{

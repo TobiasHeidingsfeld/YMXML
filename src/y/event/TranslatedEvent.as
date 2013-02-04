@@ -25,6 +25,8 @@ package y.event
 		
 		new TranslatedEvent(starling.events.Event.CHANGE, flash.events.Event.CHANGE);
 		
+		new TranslatedEvent("enter", "enter");
+		
 		new TranslatedEvent(starling.events.Event.TRIGGERED, MouseEvent.CLICK, function(event : starling.events.Event) : Object
 		{
 			event;

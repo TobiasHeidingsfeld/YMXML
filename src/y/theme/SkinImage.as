@@ -2,10 +2,11 @@ package y.theme
 {
 	import feathers.display.Scale9Image;
 	import feathers.textures.Scale9Textures;
-
-	import starling.display.Image;
-
 	import flash.geom.Rectangle;
+	import starling.display.Image;
+	import y.util.DynamicTextureAtlas;
+
+
 
 	public class SkinImage implements ISkinSetting
 	{

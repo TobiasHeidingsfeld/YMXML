@@ -1,5 +1,7 @@
 package y.controls
 {
+	import y.util.DynamicTextureAtlas;
+
 	import starling.core.Starling;
 
 	import y.theme.YTheme;
@@ -12,20 +14,24 @@ package y.controls
 
 	[DefaultProperty("mxmlContent")]
 	[Event(name="context3DCreate", type="flash.events.Event")]
+	[Event(name="starlingInitialized", type="flash.events.Event")]
 	public class YApplication extends flash.display.Sprite
 	{
 		public static var instance : YApplication;
 		public var starling : Starling;
 		public var starlingRoot : FeathersRoot;
 		public var theme : YTheme = new YTheme();
+		public var starlingInitialized : Boolean;
+		public var preCreatedTextureAtlas : Object;
+		public var preCreatedTextureAtlasInfo : Object;
 		private var fixedWidth : Number;
 		private var fixedHeight : Number;
-		private var _paddingTop : Number = 0;
-		
+		private var _minPaddingTop : Number = 0;
+
 		public function YApplication()
 		{
 			if (instance)
-				throw new Error("YApplication is a singleton, can only be used once");
+				trace("[YMXML]: YAPPLICATION SHOULD BE SINGLETON AND NOT CREATED MORE THEN ONCE");
 			instance = this;
 			if (stage)
 				initApplication(null);
@@ -38,21 +44,23 @@ package y.controls
 			fixedWidth = stage.stageWidth;
 			fixedHeight = stage.stageHeight;
 			stage.quality = StageQuality.LOW;
-			Starling.multitouchEnabled = true;
-			Starling.handleLostContext = EnvironmentHelper.isiOS;
-			
+			Starling.handleLostContext = true;
+
 			starling = new Starling(FeathersRoot, stage);
-			starling.addEventListener("rootCreated", contextCreated);		
-			starling.start();			
+			starling.addEventListener("rootCreated", contextCreated);
+			starling.start();
+
+			starlingInitialized = true;
+			dispatchEvent(new Event("starlingInitialized"));
 		}
 
 		private function contextCreated(event : Object) : void
 		{
 			setViewPort();
-			
+
 			if (theme)
-				theme.apply();			
-			
+				theme.apply();
+
 			for each (var item : YSprite in _content)
 				starlingRoot.addChild(item.getUIE());
 
@@ -60,14 +68,17 @@ package y.controls
 
 			addEventListener(Event.DEACTIVATE, handleActiveChange);
 			addEventListener(Event.ACTIVATE, handleActiveChange);
-			
-			event;			
+
+			event;
 		}
 
 		protected function setViewPort() : void
 		{
-			var scale : Number = Math.min(EnvironmentHelper.width / fixedWidth, (EnvironmentHelper.height - paddingTop) / fixedHeight);
-			starling.viewPort = new Rectangle(0, paddingTop, fixedWidth * scale, fixedHeight * scale);			
+			var scale : Number = Math.min(EnvironmentHelper.width / fixedWidth, (EnvironmentHelper.height - minPaddingTop) / fixedHeight);
+			var offsetX : Number = (EnvironmentHelper.width - fixedWidth * scale) / 2;
+			var offsetY : Number = ((EnvironmentHelper.height - minPaddingTop) - fixedHeight * scale) / 2 + minPaddingTop;
+			if (scale > 0.1)
+				starling.viewPort = new Rectangle(offsetX, offsetY, fixedWidth * scale, fixedHeight * scale);
 		}
 
 		private function handleActiveChange(event : Event) : void
@@ -99,19 +110,40 @@ package y.controls
 
 		public function set showStats(value : Boolean) : void
 		{
-			if(starling)
+			if (starling)
 				starling.showStats = value;
 		}
 
-		public function get paddingTop() : Number
+		public function get minPaddingTop() : Number
 		{
-			return _paddingTop;
+			return _minPaddingTop;
 		}
 
-		public function set paddingTop(paddingTop : Number) : void
+		public function set minPaddingTop(paddingTop : Number) : void
 		{
-			this._paddingTop = paddingTop;
-			setViewPort();
+			this._minPaddingTop = paddingTop;
+			try
+			{
+				setViewPort();
+				theme.addBackground();
+			}
+			catch(error : Error)
+			{
+			}
+		}
+
+		public function insertAllEmbbededImages() : void
+		{
+			if (starlingInitialized)
+				DynamicTextureAtlas.insertAllEmbedds();
+			else
+			{
+				addEventListener("starlingInitialized", function(e : Object) : void
+				{
+					e;
+					DynamicTextureAtlas.insertAllEmbedds();
+				});
+			}
 		}
 	}
 }

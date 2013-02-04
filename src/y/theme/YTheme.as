@@ -22,6 +22,7 @@ package y.theme
 		public var chromeColor : int = 0xCCAACC;
 		public var scale : Number = 1;
 		private var displayWatcher : DisplayListWatcher;
+		private var bgContainer : BackgroundContainerImage;
 
 		public function YTheme()
 		{
@@ -34,7 +35,9 @@ package y.theme
 		{
 			if (backgroundImage == null)
 				return;
-			new BackgroundImage(backgroundImage);
+			if(bgContainer)
+				bgContainer.dispose();
+			bgContainer = new BackgroundContainerImage(backgroundImage);
 		}
 
 		public function apply() : void
@@ -56,7 +59,7 @@ package y.theme
 		protected function popUpOverlayFactory() : DisplayObject
 		{
 			const quad : Quad = new Quad(100, 100, 0x1a1a1a);
-			quad.alpha = 0.85;
+			quad.alpha = 0.6;
 			return quad;
 		}
 

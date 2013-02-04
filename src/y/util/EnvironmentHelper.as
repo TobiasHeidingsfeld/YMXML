@@ -18,11 +18,15 @@ package y.util
 
 		public static function get width() : Number
 		{
+			if(YApplication.instance.stage == null)
+				return 0;
 			return isAir ? YApplication.instance.stage.fullScreenWidth : YApplication.instance.stage.stageWidth;
 		}
 		
 		public static function get height() : Number
 		{
+			if(YApplication.instance.stage == null)
+				return 0;
 			return isAir ? YApplication.instance.stage.fullScreenHeight : YApplication.instance.stage.stageHeight;
 		}
 	}

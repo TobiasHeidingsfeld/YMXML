@@ -1,23 +1,22 @@
 package y.display
 {
-	import y.controls.YApplication;
-
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 
-	import y.theme.DynamicTextureAtlas;
+	import y.controls.YApplication;
+	import y.util.DynamicTextureAtlas;
 
 	import flash.utils.setTimeout;
 
 	public class ImageYDisplay extends Sprite
 	{
-		private var _image : Image;
 		protected var _source : Object;
 		protected var _imageWidth : Number;
 		protected var _imageHeight : Number;
 		protected var _textureAtlasName : String;
+		private var _image : Image;
 
 		public function set source(value : Object) : void
 		{
@@ -31,18 +30,29 @@ package y.display
 					createImageIfReady();
 				}
 				else
-					throw new Error("implement String Url loading");
+				{
+					loadImage(string);
+				}
 			}
 			else
 			{
 				_textureAtlasName = DynamicTextureAtlas.instance.addEmbeddedImage(_source);
-				createImageIfReady();
+				createImageIfReady();				
 			}
+		}
+
+		private function loadImage(string : String) : void
+		{
 		}
 
 		public function get source() : Object
 		{
 			return _source;
+		}
+
+		public function ImageYDisplay(value : Object = null)
+		{
+			source = value;
 		}
 
 		private function createImageIfReady() : void
@@ -71,7 +81,6 @@ package y.display
 				return;
 
 			createImage();
-
 			if (!isNaN(_imageWidth))
 				width = _imageWidth;
 			if (!isNaN(_imageHeight))

@@ -43,11 +43,6 @@ package y.util
 				clone.color = textFormat.color;
 				clone.align = textFormat.align;
 			}
-			// for (var property : String in textFormat)
-			// {
-			// trace(property);
-			// clone[property] = textFormat[property];
-			// }
 			return clone;
 		}
 	}

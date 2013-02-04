@@ -14,14 +14,19 @@ package y.theme
 	import flash.display.Shape;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	public class BackgroundImage
+	public class BackgroundContainerImage
 	{
-		public function BackgroundImage(backgroundImage : Object)
+		private var backgroundDisplayObject : BitmapAsset;
+		private var rectMask : Shape;
+		private var starlingBackgroundDisplayObject : Image;
+		private var texture : Texture;
+		
+		public function BackgroundContainerImage(backgroundImage : Object)
 		{
-			var rectMask : Shape = new Shape();
+			rectMask = new Shape();
 			var viewport : Rectangle = Starling.current.viewPort;
 			var scale : Number = Starling.contentScaleFactor;
-			var backgroundDisplayObject : BitmapAsset = new (backgroundImage)();
+			backgroundDisplayObject = new (backgroundImage)();
 			backgroundDisplayObject.smoothing = true;
 			backgroundDisplayObject.scaleX = backgroundDisplayObject.scaleY = scale;
 			backgroundDisplayObject.x = (EnvironmentHelper.width - backgroundDisplayObject.width) / 2;
@@ -39,11 +44,21 @@ package y.theme
 			YApplication.instance.addChild(rectMask);
 
 			var starlingBG : BitmapData = new BitmapData(viewport.width / Starling.contentScaleFactor, viewport.height / Starling.contentScaleFactor);
-			starlingBG.copyPixels(backgroundDisplayObject.bitmapData, new Rectangle(viewport.x - backgroundDisplayObject.x / scale, viewport.y - backgroundDisplayObject.y / scale, starlingBG.width, starlingBG.height), new Point());
-			var starlingBackgroundDisplayObject : Image = new Image(Texture.fromBitmapData(starlingBG));
+			
+			starlingBG.copyPixels(backgroundDisplayObject.bitmapData, new Rectangle((viewport.x - backgroundDisplayObject.x) / scale, (viewport.y - backgroundDisplayObject.y) / scale, starlingBG.width, starlingBG.height), new Point());
+			texture = Texture.fromBitmapData(starlingBG);
+			starlingBackgroundDisplayObject = new Image(texture);
 			starlingBackgroundDisplayObject.blendMode = BlendMode.NONE;
 			starlingBackgroundDisplayObject.touchable = false;
 			YApplication.instance.starlingRoot.addChildAt(starlingBackgroundDisplayObject, 0);			
+		}
+
+		public function dispose() : void
+		{
+			starlingBackgroundDisplayObject.removeFromParent(true);
+			texture.dispose();
+			backgroundDisplayObject.parent.removeChild(backgroundDisplayObject);
+			rectMask.parent.removeChild(rectMask);
 		}
 	}
 }

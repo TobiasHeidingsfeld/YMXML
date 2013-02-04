@@ -3,7 +3,7 @@ package y.display
 	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.textures.Texture;
-	import y.theme.DynamicTextureAtlas;
+	import y.util.DynamicTextureAtlas;
 
 
 

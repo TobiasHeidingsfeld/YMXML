@@ -1,4 +1,4 @@
-package y.theme
+package y.util
 {
 	import mx.core.BitmapAsset;
 	import flash.display.BitmapData;
@@ -14,7 +14,7 @@ package y.theme
 		{
 			this.name = name;
 			this.image = image;
-			if(image)
+			if(image && image as Class)
 				bitmapData = (new image() as BitmapAsset).bitmapData;
 		}
 	}
