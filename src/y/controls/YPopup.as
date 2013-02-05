@@ -9,7 +9,8 @@ package y.controls
 
 	public class YPopup extends YGroup
 	{
-		public static var fadeDuration : int = 500;
+		public static var defaultFadeDuration : int = 500;
+		public var fadeDuration : int = defaultFadeDuration;
 		public var modal : Boolean = true;
 
 		override protected function createUIE() : void

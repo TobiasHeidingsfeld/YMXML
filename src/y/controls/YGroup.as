@@ -1,11 +1,8 @@
 package y.controls
 {
-	import starling.display.Sprite;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.layout.ILayout;
-
-	import y.util.setTimeoutStarling;
 
 	import flash.events.Event;
 
@@ -23,14 +20,7 @@ package y.controls
 		private function handleAtStage(event : Event) : void
 		{
 			if (layout)
-			{
-				var sprite : Sprite = new Sprite();
-				uie.addChild(sprite);
-				setTimeoutStarling(function() : void
-				{
-					sprite.removeFromParent(true);
-				}, 10);
-			}
+				t.invalidate();
 		}
 
 		public function get t() : ScrollContainer

@@ -31,10 +31,14 @@ package y.theme
 			super.initialize();
 			_textField.filters = _filters;
 		}
-		
+	
+		override public function set text(value : String) : void
+		{
+			super.text = " " + value + " ";
+		}
 		
 		private static const HELPER_MATRIX:Matrix = new Matrix();
-		
+				
 		override protected function refreshSnapshot():void
 		{
 			if(this._textField.width == 0 || this._textField.height == 0)
