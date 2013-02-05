@@ -1,5 +1,6 @@
 package y.display
 {
+	import starling.textures.Texture;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -8,6 +9,9 @@ package y.display
 	import y.controls.YApplication;
 	import y.util.DynamicTextureAtlas;
 
+	import flash.display.Bitmap;
+	import flash.display.Loader;
+	import flash.net.URLRequest;
 	import flash.utils.setTimeout;
 
 	public class ImageYDisplay extends Sprite
@@ -16,7 +20,8 @@ package y.display
 		protected var _imageWidth : Number;
 		protected var _imageHeight : Number;
 		protected var _textureAtlasName : String;
-		private var _image : Image;
+		protected var _image : Image;
+		protected var _textureByUrlLoading : Texture;
 
 		public function set source(value : Object) : void
 		{
@@ -37,12 +42,25 @@ package y.display
 			else
 			{
 				_textureAtlasName = DynamicTextureAtlas.instance.addEmbeddedImage(_source);
-				createImageIfReady();				
+				createImageIfReady();
 			}
 		}
 
 		private function loadImage(string : String) : void
 		{
+			var imageLoader : Loader = new Loader();
+			imageLoader.load(new URLRequest(string));
+			imageLoader.contentLoaderInfo.addEventListener("complete", function(e : Object) : void
+			{
+				var bitmap : Bitmap = e["target"]["content"] as Bitmap;
+				removeOldImage();
+				if(_textureByUrlLoading)
+					_textureByUrlLoading.dispose();
+				_textureByUrlLoading = Texture.fromBitmap(bitmap);
+				_image = new Image(_textureByUrlLoading);
+				addChild(_image);
+				updateSize();				
+			});
 		}
 
 		public function get source() : Object
@@ -71,16 +89,27 @@ package y.display
 
 		protected function createDisplay() : void
 		{
-			if (_image != null)
-			{
-				removeChild(_image);
-				_image = null;
-			}
+			removeOldImage();
 
 			if (_textureAtlasName == null)
 				return;
 
 			createImage();
+			
+			updateSize();
+		}
+
+		private function removeOldImage() : void
+		{
+			if (_image != null)
+			{
+				removeChild(_image);
+				_image = null;
+			}
+		}
+
+		private function updateSize() : void
+		{
 			if (!isNaN(_imageWidth))
 				width = _imageWidth;
 			if (!isNaN(_imageHeight))

@@ -49,12 +49,16 @@ package y.controls
 
 		private function tryRemovePopup() : void
 		{
-			try
+			if (!_displayPopup)
 			{
-				PopUpManager.removePopUp(uie);
-			}
-			catch(error : Error)
-			{
+				try
+				{
+					PopUpManager.removePopUp(uie);
+				}
+				catch(error : Error)
+				{
+					trace(error.message);
+				}
 			}
 		}
 	}
