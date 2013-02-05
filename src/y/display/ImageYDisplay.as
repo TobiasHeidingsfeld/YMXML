@@ -1,17 +1,15 @@
 package y.display
 {
-	import starling.textures.Texture;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.textures.Texture;
 
 	import y.controls.YApplication;
 	import y.util.DynamicTextureAtlas;
+	import y.util.TextureUrlCache;
 
-	import flash.display.Bitmap;
-	import flash.display.Loader;
-	import flash.net.URLRequest;
 	import flash.utils.setTimeout;
 
 	public class ImageYDisplay extends Sprite
@@ -21,8 +19,7 @@ package y.display
 		protected var _imageHeight : Number;
 		protected var _textureAtlasName : String;
 		protected var _image : Image;
-		protected var _textureByUrlLoading : Texture;
-
+		
 		public function set source(value : Object) : void
 		{
 			_source = value;
@@ -48,19 +45,14 @@ package y.display
 
 		private function loadImage(string : String) : void
 		{
-			var imageLoader : Loader = new Loader();
-			imageLoader.load(new URLRequest(string));
-			imageLoader.contentLoaderInfo.addEventListener("complete", function(e : Object) : void
+			TextureUrlCache.load(string, function(texture : Texture): void
 			{
-				var bitmap : Bitmap = e["target"]["content"] as Bitmap;
-				removeOldImage();
-				if(_textureByUrlLoading)
-					_textureByUrlLoading.dispose();
-				_textureByUrlLoading = Texture.fromBitmap(bitmap);
-				_image = new Image(_textureByUrlLoading);
+				trace(string);
+				removeOldImage();				
+				_image = new Image(texture);
 				addChild(_image);
-				updateSize();				
-			});
+				updateSize();
+			});			
 		}
 
 		public function get source() : Object

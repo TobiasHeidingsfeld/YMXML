@@ -66,9 +66,6 @@ package y.controls
 
 			dispatchEvent(new Event("context3DCreate"));
 
-			addEventListener(Event.DEACTIVATE, handleActiveChange);
-			addEventListener(Event.ACTIVATE, handleActiveChange);
-
 			event;
 		}
 
@@ -79,20 +76,6 @@ package y.controls
 			var offsetY : Number = ((EnvironmentHelper.height - minPaddingTop) - fixedHeight * scale) / 2 + minPaddingTop;
 			if (scale > 0.1)
 				starling.viewPort = new Rectangle(offsetX, offsetY, fixedWidth * scale, fixedHeight * scale);
-		}
-
-		private function handleActiveChange(event : Event) : void
-		{
-			var active : Boolean = event.type == Event.ACTIVATE;
-
-			if (starling && active && !starling.isStarted)
-				starling.start();
-			if (starling && !active && starling.isStarted)
-			{
-				starling.nextFrame();
-				starling.nextFrame();
-				starling.stop();
-			}
 		}
 
 		private var _content : Array = [];
