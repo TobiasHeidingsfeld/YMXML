@@ -47,7 +47,6 @@ package y.display
 		{
 			TextureUrlCache.load(string, function(texture : Texture): void
 			{
-				trace(string);
 				removeOldImage();				
 				_image = new Image(texture);
 				addChild(_image);
