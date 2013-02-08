@@ -30,7 +30,7 @@ package y.controls
 		public var transitionDelay : int;
 		public var children : Array = [];
 		protected var uie : Sprite;
-		protected var _content : Array;		
+		protected var _content : Array;
 		protected var overridePreviousMXMLContent : Boolean = true;
 
 		public function YSprite()
@@ -91,20 +91,23 @@ package y.controls
 		public function setProperty(string : String, value : Number) : void
 		{
 			if (transitionDuration > 0)
-			{
-				var tween : Tween = new Tween(uie, transitionDuration / 1000);
-				tween.delay = transitionDelay / 1000;
-				tween.animate(string, value);
-				if (Starling.juggler)
-					Starling.juggler.add(tween);
-				else
-					YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, function(event : Event) : void
-					{
-						Starling.juggler.add(tween);
-					});
-			}
+				animate(uie, string, value, transitionDuration);
 			else
 				uie[string] = value;
+		}
+
+		public function animate(object : Object, string : String, value : Number, duration : int) : void
+		{
+			var tween : Tween = new Tween(object, duration / 1000);
+			tween.delay = transitionDelay / 1000;
+			tween.animate(string, value);
+			if (Starling.juggler)
+				Starling.juggler.add(tween);
+			else
+				YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, function(event : Event) : void
+				{
+					Starling.juggler.add(tween);
+				});
 		}
 
 		public function get x() : Number

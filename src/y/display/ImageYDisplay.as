@@ -45,12 +45,13 @@ package y.display
 
 		private function loadImage(string : String) : void
 		{
+			var lostThis : ImageYDisplay = this;
 			TextureUrlCache.load(string, function(texture : Texture): void
 			{
-				removeOldImage();				
-				_image = new Image(texture);
-				addChild(_image);
-				updateSize();
+				lostThis.removeOldImage();				
+				lostThis._image = new Image(texture);
+				lostThis.addChild(_image);
+				lostThis.updateSize();
 			});			
 		}
 
