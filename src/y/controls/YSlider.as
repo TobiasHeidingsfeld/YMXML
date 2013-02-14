@@ -3,7 +3,7 @@ package y.controls
 	import feathers.controls.Slider;
 	
 	[Event(name="change", type="flash.events.Event")]
-	public class YSlider extends YSprite
+	public class YSlider extends YDisplayObject
 	{
 		override protected function createUIE() : void
 		{

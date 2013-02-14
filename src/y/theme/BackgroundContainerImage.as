@@ -44,8 +44,10 @@ package y.theme
 			YApplication.instance.addChild(rectMask);
 
 			var starlingBG : BitmapData = new BitmapData(viewport.width / Starling.contentScaleFactor, viewport.height / Starling.contentScaleFactor);
-			
-			starlingBG.copyPixels(backgroundDisplayObject.bitmapData, new Rectangle((viewport.x - backgroundDisplayObject.x) / scale, (viewport.y - backgroundDisplayObject.y) / scale, starlingBG.width, starlingBG.height), new Point());
+
+			var bgX : Number = (viewport.x - backgroundDisplayObject.x) / scale;
+			var bgY : Number = (viewport.y - backgroundDisplayObject.y) / scale;
+			starlingBG.copyPixels(backgroundDisplayObject.bitmapData, new Rectangle(bgX, bgY, starlingBG.width, starlingBG.height), new Point());
 			texture = Texture.fromBitmapData(starlingBG);
 			starlingBackgroundDisplayObject = new Image(texture);
 			starlingBackgroundDisplayObject.blendMode = BlendMode.NONE;

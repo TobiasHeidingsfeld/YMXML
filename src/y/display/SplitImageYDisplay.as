@@ -5,8 +5,6 @@ package y.display
 	import starling.textures.Texture;
 	import y.util.DynamicTextureAtlas;
 
-
-
 	public class SplitImageYDisplay extends ImageYDisplay
 	{
 		private var _imageSplits : Array;
@@ -23,7 +21,7 @@ package y.display
 
 		override protected function createImage() : void
 		{
-			removeChildren();
+			//removeChildren();
 			_images = [];
 			var texture : Texture = DynamicTextureAtlas.instance.getTexture(_textureAtlasName);
 			for each (var split : Rectangle in _imageSplits)
@@ -32,7 +30,7 @@ package y.display
 				image.x = split.x;
 				image.y = split.y;
 				_images.push(image);
-				addChild(image);
+				//addChild(image);
 			}
 		}
 		

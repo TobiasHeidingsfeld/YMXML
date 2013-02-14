@@ -29,7 +29,7 @@ package y.controls
 		{
 			if (_particleSystem)
 			{
-				uie.removeChild(_particleSystem);
+				sprite.removeChild(_particleSystem);
 				Starling.juggler.remove(_particleSystem);
 			}
 			if (_textureAtlasName && _config)
@@ -38,7 +38,7 @@ package y.controls
 				{
 					_particleSystem = new PDParticleSystem(XML(new (_config)()), DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
 					running = _running;
-					uie.addChild(_particleSystem);
+					sprite.addChild(_particleSystem);
 					Starling.juggler.add(_particleSystem);
 					start();
 				}

@@ -1,7 +1,6 @@
 package y.event
 {
 	import starling.display.DisplayObject;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.TouchEvent;
@@ -128,7 +127,7 @@ package y.event
 			translatedEvents[event] = this;
 		}
 
-		public function create(listener : Function, uie : Sprite) : void
+		public function create(listener : Function, uie : DisplayObject) : void
 		{
 			if (eventTranslation.length == 2)
 			{
@@ -152,7 +151,7 @@ package y.event
 			uie.addEventListener(starlingEvent, newListenerFunction);
 		}
 
-		public function remove(listener : Function, uie : Sprite) : void
+		public function remove(listener : Function, uie : DisplayObject) : void
 		{
 			// bei add ein "dicionary oder ähnliches mit dem orginal eventlisterner und dem  newListenerFunction und so die newListenerFunction bekommen und beim uie abmelden und den eintrag im dictionary entfernen
 		}

@@ -15,7 +15,8 @@ package y.util
 		{			
 			if (textureCache[string])
 			{
-				setTimeoutStarling(callback, 50, textureCache[string]);
+				//setTimeoutStarling(callback, 350, textureCache[string]);
+				callback(textureCache[string]);
 				return;
 			}
 			var imageLoader : Loader = new Loader();
@@ -23,7 +24,7 @@ package y.util
 			imageLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e : Object) : void
 			{
 			});
-			trace(string);
+			
 			imageLoader.contentLoaderInfo.addEventListener("complete", function(e : Object) : void
 			{
 				var bitmap : Bitmap = e["target"]["content"] as Bitmap;

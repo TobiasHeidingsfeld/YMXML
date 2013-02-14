@@ -3,7 +3,7 @@ package y.controls
 	import feathers.controls.TextInput;
 
 	[Event(name="enter", type="flash.events.Event")]
-	public class YTextInput extends YSprite
+	public class YTextInput extends YDisplayObject
 	{
 		override protected function createUIE() : void
 		{

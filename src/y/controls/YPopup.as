@@ -57,7 +57,7 @@ package y.controls
 				}
 				catch(error : Error)
 				{
-					trace(error.message);
+					
 				}
 			}
 		}

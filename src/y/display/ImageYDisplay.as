@@ -1,58 +1,52 @@
 package y.display
 {
-	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.textures.Texture;
 
-	import y.controls.YApplication;
 	import y.util.DynamicTextureAtlas;
 	import y.util.TextureUrlCache;
 
-	import flash.utils.setTimeout;
+	import flash.display.BitmapData;
 
-	public class ImageYDisplay extends Sprite
+	public class ImageYDisplay extends Image
 	{
+		private static var EMTPY_TEXTURE : Texture;
 		protected var _source : Object;
-		protected var _imageWidth : Number;
-		protected var _imageHeight : Number;
-		protected var _textureAtlasName : String;
-		protected var _image : Image;
+		private var _setWidth : Number;
+		private var _setHeight : Number;
 		
+		public function ImageYDisplay(value : Object = null)
+		{
+			if (EMTPY_TEXTURE == null)
+				EMTPY_TEXTURE = Texture.fromBitmapData(new BitmapData(1, 1));			
+			super(EMTPY_TEXTURE);
+			source = value;
+		}
+
 		public function set source(value : Object) : void
 		{
 			_source = value;
+			if (value == null)
+				return;
 			if (value is String)
 			{
 				var string : String = value as String;
 				if (DynamicTextureAtlas.instance.getTexture(string))
-				{
-					_textureAtlasName = string;
-					createImageIfReady();
-				}
+					setNewTexture(DynamicTextureAtlas.instance.getTexture(string));
 				else
-				{
 					loadImage(string);
-				}
+				
 			}
 			else
 			{
-				_textureAtlasName = DynamicTextureAtlas.instance.addEmbeddedImage(_source);
-				createImageIfReady();
+				var textureAtlasName : String = DynamicTextureAtlas.instance.addEmbeddedImage(_source);
+				setNewTexture(DynamicTextureAtlas.instance.getTexture(textureAtlasName));
 			}
 		}
 
 		private function loadImage(string : String) : void
 		{
-			var lostThis : ImageYDisplay = this;
-			TextureUrlCache.load(string, function(texture : Texture): void
-			{
-				lostThis.removeOldImage();				
-				lostThis._image = new Image(texture);
-				lostThis.addChild(_image);
-				lostThis.updateSize();
-			});			
+			TextureUrlCache.load(string, setNewTexture);
 		}
 
 		public function get source() : Object
@@ -60,77 +54,28 @@ package y.display
 			return _source;
 		}
 
-		public function ImageYDisplay(value : Object = null)
+		private function setNewTexture(newTexture : Texture) : void
 		{
-			source = value;
+			texture = newTexture;
+			readjustSize();
+			if(!isNaN(_setWidth))
+				width = _setWidth;
+			if(!isNaN(_setHeight))
+				height = _setHeight;
 		}
-
-		private function createImageIfReady() : void
-		{
-			if (Starling.current && Starling.current.context)
-				setTimeout(createDisplay, 1);
-			else
-				YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, handleContextCreated);
-		}
-
-		private function handleContextCreated(event : *) : void
-		{
-			YApplication.instance.removeEventListener(event["type"], handleContextCreated);
-			createDisplay();
-		}
-
-		protected function createDisplay() : void
-		{
-			removeOldImage();
-
-			if (_textureAtlasName == null)
-				return;
-
-			createImage();
-			
-			updateSize();
-		}
-
-		private function removeOldImage() : void
-		{
-			if (_image != null)
-			{
-				removeChild(_image);
-				_image = null;
-			}
-		}
-
-		private function updateSize() : void
-		{
-			if (!isNaN(_imageWidth))
-				width = _imageWidth;
-			if (!isNaN(_imageHeight))
-				height = _imageHeight;
-		}
-
-		protected function createImage() : void
-		{
-			if (_textureAtlasName != null && _textureAtlasName != "")
-			{
-				_image = new Image(DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
-				addChild(_image);
-			}
-		}
-
+		
+		
 		override public function set width(value : Number) : void
 		{
-			if (_image != null)
-				_image.width = value;
 			super.width = value;
-			_imageWidth = value;
+			_setWidth = value;
 		}
-
+		
+		
 		override public function set height(value : Number) : void
 		{
-			if (_image != null)
-				_image.height = value;
 			super.height = value;
-			_imageHeight = value;
+			_setHeight = value;
 		}
 	}
 }
