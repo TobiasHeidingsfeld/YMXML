@@ -32,14 +32,14 @@ package y.controls
 			if (_dataProvider)
 				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleCollectionChange);
 			_dataProvider = value;
-			if(_dataProvider)
+			if (_dataProvider)
 				_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleCollectionChange);
 			createRenderers();
 		}
 
 		private function handleCollectionChange(event : CollectionEvent) : void
 		{
-			if(_itemRenderer == null)
+			if (_itemRenderer == null)
 				return;
 			var renderer : YItemRenderer;
 			var i : int;
@@ -61,23 +61,28 @@ package y.controls
 					renderer.data = event.items[i];
 				}
 			}
+			if (event.kind == CollectionEventKind.RESET)
+				remove(sprite.numChildren, 0);
 			if (event.kind == CollectionEventKind.REMOVE)
+				remove(event.items.length, event.location);			
+		}
+
+		private function remove(length : uint, location : int) : void
+		{
+			for (var i : int = 0; i < length; i++)
 			{
-				for (i = 0; i < event.items.length; i++)
+				var renderer : YItemRenderer = _instantiadedItemRenderers[location + i];
+				var removeTime : int = 0;
+				if (removeEffect)
 				{
-					renderer = _instantiadedItemRenderers[event.location + i];
-					var removeTime : int = 0;
-					if (removeEffect)
-					{
-						removeEffect.removeOldTween = false;
-						removeEffect.target = renderer.getUIE();
-						removeEffect.play();
-						removeTime = removeEffect.delay + removeEffect.duration;
-					}
-					setTimeoutStarling(removeRenderer, removeTime, renderer);
+					removeEffect.removeOldTween = false;
+					removeEffect.target = renderer.getUIE();
+					removeEffect.play();
+					removeTime = removeEffect.delay + removeEffect.duration;
 				}
-				_instantiadedItemRenderers.splice(event.location, event.items.length);
+				setTimeoutStarling(removeRenderer, removeTime, renderer);
 			}
+			_instantiadedItemRenderers.splice(location, length);
 		}
 
 		private function createRenderer() : YItemRenderer

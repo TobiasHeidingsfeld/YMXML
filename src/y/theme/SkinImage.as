@@ -6,8 +6,6 @@ package y.theme
 	import starling.display.Image;
 	import y.util.DynamicTextureAtlas;
 
-
-
 	public class SkinImage implements ISkinSetting
 	{
 		public var skinName : String;
@@ -15,6 +13,7 @@ package y.theme
 		public var scale9 : String;
 		private var _textureAtlasName : String;
 		private var _scale9Grid : Rectangle;
+		private var _scale9Textures : Scale9Textures;
 		
 		public function initialize() : void
 		{
@@ -28,7 +27,7 @@ package y.theme
 			else if(_scale9Grid == null)	
 				item[skinName] = new Image(DynamicTextureAtlas.instance.getTexture(_textureAtlasName));
 			else 
-				item[skinName] = new Scale9Image(new Scale9Textures(DynamicTextureAtlas.instance.getTexture(_textureAtlasName), _scale9Grid));
+				item[skinName] = new Scale9Image(_scale9Textures);
 		}
 
 		public function prepareTexture() : void
@@ -40,6 +39,7 @@ package y.theme
 			{
 				var props : Array = scale9.split(",");
 				_scale9Grid = new Rectangle(parseInt(props[0]), parseInt(props[1]), parseInt(props[2]), parseInt(props[3]));
+				_scale9Textures = new Scale9Textures(DynamicTextureAtlas.instance.getTexture(_textureAtlasName), _scale9Grid);
 			}
 		}
 	}

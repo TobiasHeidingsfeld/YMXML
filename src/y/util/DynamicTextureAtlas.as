@@ -125,7 +125,7 @@ package y.util
 
 			// if(texture)
 			// texture.dispose();
-			texture = Texture.fromBitmapData(finalBitmap, false, false);
+			texture = Texture.fromBitmapData(finalBitmap, true, false);
 			textureAtlas = new TextureAtlas(texture);
 			// trace("[YMXML] texture upload:" + (getTimer() - start) + "ms");
 

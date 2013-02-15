@@ -10,7 +10,8 @@ package y.controls
 	{		
 		override protected function createUIE() : void
 		{
-			uie = new Label();											
+			uie = new Label();
+			touchable = false;											
 		}
 		
 		public function get t():Label { return uie as Label; }
