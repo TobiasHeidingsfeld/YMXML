@@ -80,7 +80,10 @@ package y.controls
 					removeEffect.play();
 					removeTime = removeEffect.delay + removeEffect.duration;
 				}
-				setTimeoutStarling(removeRenderer, removeTime, renderer);
+				if(removeTime > 0)
+					setTimeoutStarling(removeRenderer, removeTime, renderer);
+				else
+					removeRenderer(renderer);
 			}
 			_instantiadedItemRenderers.splice(location, length);
 		}

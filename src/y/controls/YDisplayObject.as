@@ -30,7 +30,7 @@ package y.controls
 		
 		public function YDisplayObject()
 		{
-			createUIE();
+			createUIE();			
 		}
 
 		protected function createUIE() : void
@@ -42,7 +42,7 @@ package y.controls
 		{
 			var translatedEvent : TranslatedEvent = TranslatedEvent.translatedEvents[type];
 			if (translatedEvent != null)
-				translatedEvent.create(listener, uie);
+				translatedEvent.create(listener, uie);				
 			else
 				super.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}

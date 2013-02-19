@@ -1,5 +1,7 @@
 package y.util
 {
+	import flash.system.ImageDecodingPolicy;
+	import flash.system.LoaderContext;
 	import flash.events.IOErrorEvent;
 	import starling.textures.Texture;
 	import flash.display.Bitmap;
@@ -10,21 +12,23 @@ package y.util
 	public class TextureUrlCache
 	{
 		private static var textureCache : Dictionary = new Dictionary();
+		private static var loaderContext : LoaderContext = new LoaderContext(true);
+		{
+			loaderContext.imageDecodingPolicy = ImageDecodingPolicy.ON_LOAD;
+		}
 
 		public static function load(string : String, callback : Function) : void
 		{			
 			if (textureCache[string])
 			{
-				//setTimeoutStarling(callback, 350, textureCache[string]);
 				callback(textureCache[string]);
 				return;
 			}
 			var imageLoader : Loader = new Loader();
-			imageLoader.load(new URLRequest(string));
+			imageLoader.load(new URLRequest(string), loaderContext);
 			imageLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e : Object) : void
 			{
 			});
-			
 			imageLoader.contentLoaderInfo.addEventListener("complete", function(e : Object) : void
 			{
 				var bitmap : Bitmap = e["target"]["content"] as Bitmap;

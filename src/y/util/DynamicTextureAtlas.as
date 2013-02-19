@@ -10,6 +10,7 @@ package y.util
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	import flash.utils.describeType;
 	import flash.utils.getTimer;
 
@@ -27,6 +28,15 @@ package y.util
 		{
 			if (entries != null)
 				this._entries = entries;
+		}
+		
+		public function setATFData(bytes : ByteArray, entries : Array) : void
+		{
+			for each (var dta : DTAEntry in entries) 
+			{
+				addDTA(dta);
+			}
+			Texture.fromAtfData(bytes);			
 		}
 
 		public static function insertAllEmbedds() : void
@@ -49,7 +59,7 @@ package y.util
 			return textureAtlas.getTexture(name);
 		}
 
-		public function generateBitmapData() : BitmapData
+		public function generateBitmapData(forceDimensionOfTwo : Boolean = false) : BitmapData
 		{
 			var x : int,y : int, maxX : int, maxY : int, i : int;
 			_entries.sort(function(e1 : DTAEntry, e2 : DTAEntry) : int
@@ -73,6 +83,11 @@ package y.util
 			}
 
 			// trace("[YMXML] sorting:" + (getTimer() - start) + "ms");
+			if (forceDimensionOfTwo)
+			{
+				maxX = nextPowerOfTwo(maxX);
+				maxY = nextPowerOfTwo(maxY);
+			}
 
 			var finalBitmap : BitmapData = new BitmapData(maxX, maxY, true, 0x00FFFFFF);
 			var destination : Point = new Point();
@@ -84,6 +99,17 @@ package y.util
 			}
 			// trace("[YMXML] bitmap creation:" + (getTimer() - start) + "ms");
 			return finalBitmap;
+		}
+
+		private function nextPowerOfTwo(maxX : Number) : int
+		{
+			var i : int = 0;
+			while (maxX > 1)
+			{
+				maxX /= 2;
+				i++;
+			}
+			return Math.pow(2, i);
 		}
 
 		public function addEmbeddedImage(image : Object) : String
@@ -115,8 +141,7 @@ package y.util
 		{
 			return _entries;
 		}
-		
-		
+
 		private function createAtlas() : void
 		{
 			var start : int = getTimer();
@@ -139,7 +164,7 @@ package y.util
 				textureAtlas.addRegion(entry.name, entry.atlasUsedRectangle);
 			}
 			trace("[YMXML] Dynamic Texture Atlas:" + finalBitmap.width + "x" + finalBitmap.height + "px in " + (getTimer() - start) + "ms");
-			finalBitmap.dispose();			
+			finalBitmap.dispose();
 		}
 	}
 }

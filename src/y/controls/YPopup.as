@@ -38,6 +38,7 @@ package y.controls
 				visible = true;
 				PopUpManager.addPopUp(uie, modal, true);
 				tween.fadeTo(1);
+				setTimeoutStarling(PopUpManager.centerPopUp,  fadeDuration / 1000, uie);
 			}
 			else
 			{

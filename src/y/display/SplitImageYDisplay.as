@@ -1,13 +1,17 @@
 package y.display
 {
-	import flash.geom.Rectangle;
 	import starling.display.Image;
+	import starling.display.Sprite;
 	import starling.textures.Texture;
+
 	import y.util.DynamicTextureAtlas;
 
-	public class SplitImageYDisplay extends ImageYDisplay
+	import flash.geom.Rectangle;
+
+	public class SplitImageYDisplay extends Sprite
 	{
 		private var _imageSplits : Array;
+		private var _source : Object;
 		
 		public function get imageSplits() : Array
 		{
@@ -19,18 +23,19 @@ package y.display
 			this._imageSplits = imageSplits;
 		}
 
-		override protected function createImage() : void
+		protected function createImages() : void
 		{
-			//removeChildren();
+			removeChildren();
 			_images = [];
-			var texture : Texture = DynamicTextureAtlas.instance.getTexture(_textureAtlasName);
+			var textureAtlasName : String;
+			var texture : Texture = DynamicTextureAtlas.instance.getTexture(textureAtlasName);
 			for each (var split : Rectangle in _imageSplits)
 			{
 				var image : Image = new Image(Texture.fromTexture(texture, split));
 				image.x = split.x;
 				image.y = split.y;
 				_images.push(image);
-				//addChild(image);
+				addChild(image);
 			}
 		}
 		
@@ -39,6 +44,16 @@ package y.display
 		public function get imageParts() : Array
 		{
 			return _images;
+		}
+
+		public function get source() : Object
+		{
+			return _source;
+		}
+
+		public function set source(source : Object) : void
+		{
+			this._source = source;
 		}
 	}
 }

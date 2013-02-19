@@ -11,6 +11,11 @@ package y.util
 			return Capabilities.playerType == "Desktop";
 		}
 		
+		public static function get isADL(): Boolean
+		{
+			return isAir && Capabilities.os.toLowerCase().indexOf("windows") >= 0;
+		}
+		
 		public static function get isiOS(): Boolean
 		{
 			return isAir && Capabilities.manufacturer.indexOf("iOS") != -1;

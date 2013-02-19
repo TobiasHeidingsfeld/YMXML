@@ -1,13 +1,15 @@
 package y.controls
 {
-	import flash.utils.setTimeout;
 	import starling.core.Starling;
-	import starling.events.Event;
 
 	import y.display.ImageYDisplay;
 
+	import flash.events.Event;
+	import flash.utils.setTimeout;
+
 	public class YImage extends YDisplayObject
 	{
+		private const READY_EVENT : String = "ready";
 		private var proxyObject : DynamicDisplayObject;
 		private var preSetProperties : Object;
 
@@ -23,6 +25,17 @@ package y.controls
 			}
 		}
 
+		override public function addEventListener(type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false) : void
+		{
+			if (t || type == READY_EVENT)
+				super.addEventListener(type, listener, useCapture, priority, useWeakReference);
+			else if(type != READY_EVENT)
+				addEventListener(READY_EVENT, function() : void
+				{
+					addEventListener(type, listener, useCapture, priority, useWeakReference);
+				});
+		}
+
 		private function handleContextCreated(event : *) : void
 		{
 			YApplication.instance.removeEventListener(event["type"], handleContextCreated);
@@ -32,7 +45,8 @@ package y.controls
 		private function createImage() : void
 		{
 			uie = new ImageYDisplay();
-			fromProxyObject();			
+			fromProxyObject();
+			dispatchEvent(new Event(READY_EVENT));
 		}
 
 		private function fromProxyObject() : void
@@ -46,15 +60,15 @@ package y.controls
 					uie[key] = preSetProperties[key];
 			}
 		}
-		
+
 		override public function setProperty(string : String, value : Number) : void
 		{
-			if(t != null)
+			if (t != null)
 				super.setProperty(string, value);
 			else
 				preSetProperties[string] = value;
 		}
-		
+
 		public function get t() : ImageYDisplay
 		{
 			return uie as ImageYDisplay;
@@ -73,6 +87,6 @@ package y.controls
 }
 import starling.display.Sprite;
 
-dynamic class DynamicDisplayObject extends Sprite 
+dynamic class DynamicDisplayObject extends Sprite
 {
 }

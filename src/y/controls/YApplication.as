@@ -27,6 +27,7 @@ package y.controls
 		private var fixedWidth : Number;
 		private var fixedHeight : Number;
 		private var _minPaddingTop : Number = 0;
+		private var _showStats : Boolean;
 
 		public function YApplication()
 		{
@@ -49,6 +50,7 @@ package y.controls
 			starling = new Starling(FeathersRoot, stage);
 			starling.addEventListener("rootCreated", contextCreated);
 			starling.start();
+			starling.showStats = _showStats;
 
 			starlingInitialized = true;
 			dispatchEvent(new Event("starlingInitialized"));
@@ -93,6 +95,7 @@ package y.controls
 
 		public function set showStats(value : Boolean) : void
 		{
+			_showStats = value;
 			if (starling)
 				starling.showStats = value;
 		}
