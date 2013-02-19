@@ -26,18 +26,18 @@ package y.util
 
 		private function loadATFTexture() : void
 		{
-			var file : File = new File("app:/Atlas.png");
-			file = new File(file.nativePath);
-			if (file.exists)
-			{
-				var stream : FileStream = new FileStream();
-				var bytes : ByteArray = new ByteArray();
-				stream.open(file, FileMode.READ);
-				stream.readBytes(bytes);
-				stream.close();
-				trace(bytes.length);
-				// DynamicTextureAtlas.instance.setATFData(bytes, entries)
-			}
+//			var file : File = new File("app:/Atlas.png");
+//			file = new File(file.nativePath);
+//			if (file.exists)
+//			{
+//				var stream : FileStream = new FileStream();
+//				var bytes : ByteArray = new ByteArray();
+//				stream.open(file, FileMode.READ);
+//				stream.readBytes(bytes);
+//				stream.close();
+//				trace(bytes.length);
+//				// DynamicTextureAtlas.instance.setATFData(bytes, entries)
+//			}
 		}
 
 		private function addToStage(event : Event) : void
@@ -49,17 +49,20 @@ package y.util
 			writeFile("Atlas.png", bytes, null);
 			writeFile("Atlas.txt", null, JSON.stringify(DynamicTextureAtlas.instance.entries));
 			var file : File = new File("app:/Atlas");
-			var argsString : String = "-c p -i " + file.nativePath + ".png -o " + file.nativePath + "iOS.atf";
-			startATF(argsString);
-			argsString = "-c e -i " + file.nativePath + ".png -o " + file.nativePath + "Android.atf";
-			startATF(argsString);
+			startATF("-c p -i " + file.nativePath + ".png -o " + file.nativePath + "iOS.atf");
+			startATF("-c e -i " + file.nativePath + ".png -o " + file.nativePath + "Android.atf");
 		}
 
 		private function startATF(argsString : String) : void
 		{
-			var explorer : File = new File("D:\\Tools\\Adobe Gaming SDK 1.0.1\\Utilities\\ATF Tools\\Windows\\png2atf.exe");
+			var atfFile : File = new File("D:\\Tools\\Adobe Gaming SDK 1.0.1\\Utilities\\ATF Tools\\Windows\\png2atf.exe");
+			if(!atfFile.exists)
+			{
+				trace("ATF NOT FOUND");
+				return;
+			}
 			var nativeProcessStartupInfo : NativeProcessStartupInfo = new NativeProcessStartupInfo();
-			nativeProcessStartupInfo.executable = explorer;
+			nativeProcessStartupInfo.executable = atfFile;
 
 			var args : Vector.<String> = new Vector.<String>();
 			for each (var arg : String in argsString.split(" "))
