@@ -63,7 +63,7 @@ package y.controls
 			if (theme)
 				theme.apply();
 
-			for each (var item : YSprite in _content)
+			for each (var item : YDisplayObject in _content)
 				starlingRoot.addChild(item.getUIE());
 
 			dispatchEvent(new Event("context3DCreate"));
@@ -87,7 +87,7 @@ package y.controls
 			_content = content.concat(_content);
 		}
 
-		[ArrayElementType("y.controls.YSprite")]
+		[ArrayElementType("y.controls.YDisplayObject")]
 		public function get mxmlContent() : Array
 		{
 			return _content;
