@@ -40,7 +40,7 @@ package y.controls
 				addEventListener(Event.ADDED_TO_STAGE, initApplication);
 		}
 
-		private function initApplication(event : Event) : void
+		protected function initApplication(event : Event) : void
 		{
 			fixedWidth = stage.stageWidth;
 			fixedHeight = stage.stageHeight;

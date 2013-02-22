@@ -2,7 +2,7 @@ package y.controls
 {
 	import y.display.RectangleYDisplay;
 
-	public class YRectangle extends YSprite
+	public class YRectangle extends YDisplayObject
 	{
 		override protected function createUIE() : void
 		{
