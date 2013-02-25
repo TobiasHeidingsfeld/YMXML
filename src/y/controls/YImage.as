@@ -83,6 +83,16 @@ package y.controls
 		{
 			uie["source"] = value;
 		}
+		
+		public function get repeat() : Boolean
+		{
+			return uie["repeat"];
+		}
+
+		public function set repeat(value : Boolean) : void
+		{
+			uie["repeat"] = value;
+		}
 	}
 }
 import starling.display.Sprite;

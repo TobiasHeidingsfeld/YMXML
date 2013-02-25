@@ -60,13 +60,13 @@ package y.controls
 		{
 			setViewPort();
 
+			dispatchEvent(new Event("context3DCreate"));
+
 			if (theme)
 				theme.apply();
 
 			for each (var item : YDisplayObject in _content)
 				starlingRoot.addChild(item.getUIE());
-
-			dispatchEvent(new Event("context3DCreate"));
 
 			event;
 		}

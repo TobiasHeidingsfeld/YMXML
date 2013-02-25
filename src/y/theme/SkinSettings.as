@@ -7,6 +7,7 @@ package y.theme
 	{
 		public var forClass : Class;
 		public var withName : String = null;
+		public var andSubclasses : Boolean;
 		private var _skinSettings : Array;
 
 		public function set skinSettings(content : Array) : void
@@ -24,7 +25,10 @@ package y.theme
 		{
 			for each (var skinSetting : ISkinSetting in _skinSettings)
 				skinSetting.initialize();
-			displayWatcher.setInitializerForClass(forClass, handleItem, withName);
+			if(andSubclasses)
+				displayWatcher.setInitializerForClassAndSubclasses(forClass, handleItem);
+			else
+				displayWatcher.setInitializerForClass(forClass, handleItem, withName);
 		}
 
 		private function handleItem(item : Object) : void

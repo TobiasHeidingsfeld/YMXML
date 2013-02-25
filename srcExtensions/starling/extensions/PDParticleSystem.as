@@ -217,6 +217,11 @@ package starling.extensions
         
         private function parseConfig(config:XML):void
         {
+			Context3DBlendFactor;
+			config;
+			deg2rad(1);
+			/*FDT_IGNORE*/
+			
 			mEmitterXVariance = parseFloat(config.sourcePositionVariance.attribute("x"));
             mEmitterYVariance = parseFloat(config.sourcePositionVariance.attribute("y"));
             mGravityX = parseFloat(config.gravity.attribute("x"));
@@ -252,13 +257,15 @@ package starling.extensions
             mEndColorVariance = getColor(config.finishColorVariance);
             mBlendFactorSource = getBlendFunc(config.blendFuncSource);
             mBlendFactorDestination = getBlendFunc(config.blendFuncDestination);
-						
-			
+			/*FDT_IGNORE*/
+					
+			/*FDT_IGNORE*/
             function getIntValue(element:XMLList):int
             {
                 return parseInt(element.attribute("value"));
             }
             
+			
             function getFloatValue(element:XMLList):Number
             {
                 return parseFloat(element.attribute("value"));
@@ -292,6 +299,8 @@ package starling.extensions
                     default:    throw new ArgumentError("unsupported blending function: " + value);
                 }
             }
+			/*FDT_IGNORE*/
+			
         }
         
         public function get emitterType():int { return mEmitterType; }

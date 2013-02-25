@@ -51,7 +51,7 @@ package y.effect
 
 		protected function checkAutoPlay() : void
 		{
-			if(autoPlay)
+			if(autoPlay && target)
 				play();
 		}
 

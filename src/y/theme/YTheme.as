@@ -7,7 +7,6 @@ package y.theme
 	import feathers.core.ITextRenderer;
 	import feathers.core.PopUpManager;
 
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
@@ -42,10 +41,10 @@ package y.theme
 
 		public function apply() : void
 		{
-			addBackground();
 			displayWatcher = new DisplayListWatcher(YApplication.instance.starling.root as DisplayObjectContainer);
 			for each (var skin : SkinSettings in _skins)
 				skin.apply(displayWatcher);
+			addBackground();			
 		}
 
 		protected function textRendererFactory() : ITextRenderer
@@ -67,7 +66,7 @@ package y.theme
 		{
 			var stageTextEditor : StageTextTextEditor = new StageTextTextEditor();
 			stageTextEditor.fontFamily = "_serif";
-			stageTextEditor.fontSize = 20 * Starling.contentScaleFactor;
+			stageTextEditor.fontSize = 20;
 			return stageTextEditor;
 		}
 

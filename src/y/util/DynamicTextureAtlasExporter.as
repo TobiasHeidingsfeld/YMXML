@@ -23,6 +23,16 @@ package y.util
 			else
 				loadATFTexture();
 		}
+		
+		public function set AtlasData(atlas : Object): void
+		{
+			var byteArray : ByteArray = new atlas();
+			var length : int = byteArray.readByte();
+			var entrieBytes : ByteArray;
+			byteArray.readBytes(entrieBytes, 0, length);
+			var imageBytes : ByteArray;
+			byteArray.readBytes(imageBytes);
+		}
 
 		private function loadATFTexture() : void
 		{
@@ -48,6 +58,7 @@ package y.util
 			var bytes : ByteArray = encoder.encode(DynamicTextureAtlas.instance.generateBitmapData(true));
 			writeFile("Atlas.png", bytes, null);
 			writeFile("Atlas.txt", null, JSON.stringify(DynamicTextureAtlas.instance.entries));
+			trace(JSON.parse(JSON.stringify(DynamicTextureAtlas.instance.entries)));
 			var file : File = new File("app:/Atlas");
 			startATF("-c p -i " + file.nativePath + ".png -o " + file.nativePath + "iOS.atf");
 			startATF("-c e -i " + file.nativePath + ".png -o " + file.nativePath + "Android.atf");

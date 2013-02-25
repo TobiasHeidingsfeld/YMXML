@@ -4,6 +4,8 @@ package y.effect
 	{
 		private var _x : int;
 		private var _y : int;
+		private var _fromX : Number;
+		private var _fromY : Number;
 
 		public function get x() : int
 		{
@@ -28,8 +30,34 @@ package y.effect
 		}
 
 		override protected function addTweens() : void
-		{
+		{			
+			if(!isNaN(fromX))
+				target["x"] = fromX;
+			if(!isNaN(fromY))
+				target["y"] = fromY;
 			tween.moveTo(_x, _y);
+		}
+
+		public function get fromX() : Number
+		{
+			return _fromX;
+		}
+
+		public function set fromX(fromX : Number) : void
+		{
+			this._fromX = fromX;
+			checkAutoPlay();
+		}
+
+		public function get fromY() : Number
+		{
+			return _fromY;
+		}
+
+		public function set fromY(fromY : Number) : void
+		{
+			this._fromY = fromY;
+			checkAutoPlay();
 		}
 	}
 }
