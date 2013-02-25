@@ -6,7 +6,7 @@ package y.controls
 
 	import flash.filters.GlowFilter;
 
-	public class YLabel extends YDisplayObject
+	public class YLabel extends YSprite
 	{		
 		override protected function createUIE() : void
 		{
