@@ -31,11 +31,6 @@ package y.theme
 			super.initialize();
 			_textField.filters = _filters;
 		}
-	
-		override public function set text(value : String) : void
-		{
-			super.text = " " + value + " ";
-		}
 		
 		private static const HELPER_MATRIX:Matrix = new Matrix();
 				

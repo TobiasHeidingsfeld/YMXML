@@ -1,6 +1,6 @@
 package y.controls
 {
-	import y.util.setTimeoutStarling;
+	import y.util.setTimeoutYMXML;
 
 	import starling.core.Starling;
 	import starling.animation.Tween;
@@ -38,12 +38,12 @@ package y.controls
 				visible = true;
 				PopUpManager.addPopUp(uie, modal, true);
 				tween.fadeTo(1);
-				setTimeoutStarling(PopUpManager.centerPopUp,  fadeDuration / 1000, uie);
+				setTimeoutYMXML(PopUpManager.centerPopUp,  fadeDuration / 1000, uie);
 			}
 			else
 			{
 				tween.fadeTo(0);
-				setTimeoutStarling(tryRemovePopup, fadeDuration);
+				setTimeoutYMXML(tryRemovePopup, fadeDuration);
 			}
 			Starling.juggler.add(tween);
 		}

@@ -11,10 +11,11 @@ package y.theme
 	public class SkinRoundRect implements ISkinSetting
 	{
 		public var skinName : String;
-		public var color : int = YApplication.instance.theme.chromeColor;
+		public var color : uint = YApplication.instance.theme.chromeColor;
 		public var roundRect : int = 5;
 		public var borderThickness : int = 1;
 		public var borderColor : int = 0x333333;
+		public var borderAlpha : Number = 1;
 		public var size : int = 16;
 		private var _texture : Texture;
 		private var rectangle : Rectangle;
@@ -34,7 +35,7 @@ package y.theme
 		private function createTexture() : void
 		{
 			var sprite : Sprite = new Sprite();
-			sprite.graphics.beginFill(borderColor);
+			sprite.graphics.beginFill(borderColor, borderAlpha);
 			sprite.graphics.drawRoundRect(0, 0, size, size, roundRect);
 			sprite.graphics.endFill();
 

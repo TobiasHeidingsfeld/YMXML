@@ -18,7 +18,7 @@ package y.theme
 	{
 		public var defaultFont : Object;
 		public var backgroundImage : Object;
-		public var chromeColor : int = 0xCCAACC;
+		public var chromeColor : uint = 0xCCAACC;
 		public var scale : Number = 1;
 		private var displayWatcher : DisplayListWatcher;
 		private var bgContainer : BackgroundContainerImage;
@@ -66,7 +66,7 @@ package y.theme
 		{
 			var stageTextEditor : StageTextTextEditor = new StageTextTextEditor();
 			stageTextEditor.fontFamily = "_serif";
-			stageTextEditor.fontSize = 20;
+			stageTextEditor.fontSize = 18;
 			return stageTextEditor;
 		}
 

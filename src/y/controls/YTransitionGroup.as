@@ -1,12 +1,13 @@
 package y.controls
 {
+	import flash.events.Event;
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 
 	import flash.utils.setTimeout;
 
-
+	[Event(name="show", type="flash.events.Event")]
 	public class YTransitionGroup extends YGroup
 	{
 		public var duration : int = 500;
@@ -19,6 +20,7 @@ package y.controls
 				x = 480;
 				tween.moveTo(0, y);
 				uie.visible = true;
+				dispatchEvent(new Event("show"));
 			}
 			else
 			{

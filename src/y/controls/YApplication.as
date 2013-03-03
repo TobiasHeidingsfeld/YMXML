@@ -1,5 +1,6 @@
 package y.controls
 {
+	import flash.utils.setTimeout;
 	import y.util.DynamicTextureAtlas;
 
 	import starling.core.Starling;
@@ -67,7 +68,8 @@ package y.controls
 
 			for each (var item : YDisplayObject in _content)
 				starlingRoot.addChild(item.getUIE());
-
+						
+			setTimeout(dispatchEvent, 50, new Event("allDone"));
 			event;
 		}
 

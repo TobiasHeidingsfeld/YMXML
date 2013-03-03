@@ -22,6 +22,9 @@ package y.controls
 		public function get maxWidth():Number { return t.maxWidth; }
 		public function set maxWidth(value:Number):void { t.maxWidth = value;}
 		
+		public function get maxHeight():Number { return t.maxHeight; }
+		public function set maxHeight(value:Number):void { t.maxHeight = value;}
+		
 		public function get wordWrap():Boolean { return t.textRendererProperties["wordWrap"]; }
 		public function set wordWrap(value:Boolean):void { t.textRendererProperties["wordWrap"] = value;}
 		

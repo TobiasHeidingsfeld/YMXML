@@ -150,7 +150,7 @@ package y.controls
 
 		public function set rotation(value : Number) : void
 		{
-			setProperty("rotation", value);
+			setProperty("rotation", value / 180 * Math.PI);
 		}
 
 		public function get scaleX() : Number

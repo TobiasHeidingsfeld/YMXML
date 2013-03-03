@@ -1,7 +1,7 @@
 package y.controls
 {
 	import y.effect.EffectBase;
-	import y.util.setTimeoutStarling;
+	import y.util.setTimeoutYMXML;
 
 	import mx.collections.IList;
 	import mx.core.IFactory;
@@ -81,7 +81,7 @@ package y.controls
 					removeTime = removeEffect.delay + removeEffect.duration;
 				}
 				if(removeTime > 0)
-					setTimeoutStarling(removeRenderer, removeTime, renderer);
+					setTimeoutYMXML(removeRenderer, removeTime, renderer);
 				else
 					removeRenderer(renderer);
 			}

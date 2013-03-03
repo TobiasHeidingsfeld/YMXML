@@ -17,7 +17,7 @@ package y.controls
 		public function get t():Button { return uie as Button; }
 		
 		public function get label():String { return t.label; }
-		public function set label(value:String):void { t.label = value;}
+		public function set label(value:String):void { t.label = " " + value + " ";}
 		
 		public function set icon(value:Object):void { t.defaultIcon = new ImageYDisplay(value);}
 		

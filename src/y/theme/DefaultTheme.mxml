@@ -3,15 +3,15 @@
               xmlns:theme="y.theme.*">
 	<fx:Script>
 		<![CDATA[
-			import y.display.PanelDisplay;
-			import feathers.controls.Label;
-			import feathers.controls.Slider;
-			import feathers.controls.ProgressBar;
-			import feathers.controls.Button;
-			import feathers.controls.TextInput;
+			import y.controls.YButton;
+			import y.controls.YLabel;
+			import y.controls.YPanel;
+			import y.controls.YProgressBar;
+			import y.controls.YSlider;
+			import y.controls.YTextInput;
 		]]>
 	</fx:Script>
-	<theme:SkinSettings forClass="{Button}">
+	<theme:SkinSettings forClass="{YButton}">
 		<theme:SkinRoundRect skinName="defaultSkin"/>
 		<theme:SkinRoundRect skinName="hoverSkin"
 		                     color="0xDDDDDD"/>
@@ -21,16 +21,16 @@
 		<theme:SkinPadding/>
 	</theme:SkinSettings>
 	
-	<theme:SkinSettings forClass="{PanelDisplay}">
+	<theme:SkinSettings forClass="{YPanel}">
 		<theme:SkinRoundRect skinName="backgroundSkin"/>		
 	</theme:SkinSettings>
 
-	<theme:SkinSettings forClass="{Label}">
+	<theme:SkinSettings forClass="{YLabel}">
 		<theme:SkinTextFormat textPropertiesName="textRendererProperties"
 		                      size="16"/>
 	</theme:SkinSettings>
 
-	<theme:SkinSettings forClass="{TextInput}">
+	<theme:SkinSettings forClass="{YTextInput}">
 		<theme:SkinRoundRect skinName="backgroundSkin"/>
 		<theme:SkinRoundRect skinName="backgroundDisabledSkin"
 		                     color="0xBBBBBB"/>
@@ -43,7 +43,7 @@
 		<theme:SkinPadding/>
 	</theme:SkinSettings>
 
-	<theme:SkinSettings forClass="{ProgressBar}">
+	<theme:SkinSettings forClass="{YProgressBar}">
 		<theme:SkinRoundRect skinName="backgroundSkin"/>
 		<theme:SkinRoundRect skinName="fillSkin"
 		                     color="0x008000"
@@ -55,7 +55,7 @@
 		<theme:SkinPadding value="1"/>
 	</theme:SkinSettings>
 
-	<theme:SkinSettings forClass="{Slider}">
+	<theme:SkinSettings forClass="{YSlider}">
 		<theme:SkinSubComponent name="thumbProperties">
 			<theme:SkinRoundRect skinName="defaultSkin"/>
 			<theme:SkinRoundRect skinName="hoverSkin"
