@@ -11,6 +11,7 @@ package y.controls
 	public class YDatagroup extends YGroup
 	{
 		public var removeEffect : EffectBase;
+		public var addEffect : EffectBase;
 		public var objectPoolingEnabled : Boolean = true;
 		private var _objectPoolItemRenderers : Array = [];
 
@@ -41,30 +42,24 @@ package y.controls
 		{
 			if (_itemRenderer == null)
 				return;
-			var renderer : YItemRenderer;
 			var i : int;
 			if (event.kind == CollectionEventKind.ADD)
 			{
 				for each (var data : Object in event.items)
-				{
-					renderer = createRenderer();
-					_instantiadedItemRenderers.push(renderer);
-					t.addChild(renderer.getUIE());
-					renderer.data = data;
-				}
+					addRenderer(data);
 			}
 			if (event.kind == CollectionEventKind.REPLACE)
 			{
 				for (i = 0; i < event.items.length; i++)
 				{
-					renderer = _instantiadedItemRenderers[event.location + i];
+					var renderer : YItemRenderer = _instantiadedItemRenderers[event.location + i];
 					renderer.data = event.items[i];
 				}
 			}
 			if (event.kind == CollectionEventKind.RESET)
 				remove(sprite.numChildren, 0);
 			if (event.kind == CollectionEventKind.REMOVE)
-				remove(event.items.length, event.location);			
+				remove(event.items.length, event.location);
 		}
 
 		private function remove(length : uint, location : int) : void
@@ -80,7 +75,7 @@ package y.controls
 					removeEffect.play();
 					removeTime = removeEffect.delay + removeEffect.duration;
 				}
-				if(removeTime > 0)
+				if (removeTime > 0)
 					setTimeoutYMXML(removeRenderer, removeTime, renderer);
 				else
 					removeRenderer(renderer);
@@ -105,15 +100,25 @@ package y.controls
 			if (_dataProvider)
 			{
 				for (var i : int = 0; i < _dataProvider.length; i++)
-				{
-					var renderer : YItemRenderer = createRenderer();
-					_instantiadedItemRenderers.push(renderer);
-					t.addChild(renderer.getUIE());
-					var data : Object = _dataProvider.getItemAt(i);
-					if (renderer.data != data)
-						renderer.data = data;
-				}
+					addRenderer(_dataProvider.getItemAt(i));
 			}
+		}
+
+		private function addRenderer(data : Object) : YItemRenderer
+		{
+			var renderer : YItemRenderer;
+			renderer = createRenderer();
+			_instantiadedItemRenderers.push(renderer);
+			t.addChild(renderer.getUIE());
+			if (addEffect)
+			{
+				addEffect.removeOldTween = false;
+				addEffect.target = renderer.getUIE();
+				addEffect.play();				
+			}
+			if (renderer.data != data)
+				renderer.data = data;
+			return renderer;
 		}
 
 		private function removeRenderer(renderer : YItemRenderer) : void
