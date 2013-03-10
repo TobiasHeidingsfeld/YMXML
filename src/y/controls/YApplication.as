@@ -1,8 +1,5 @@
 package y.controls
 {
-	import flash.utils.setTimeout;
-	import y.util.DynamicTextureAtlas;
-
 	import starling.core.Starling;
 
 	import y.theme.YTheme;
@@ -12,6 +9,7 @@ package y.controls
 	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
+	import flash.utils.setTimeout;
 
 	[DefaultProperty("mxmlContent")]
 	[Event(name="context3DCreate", type="flash.events.Event")]
@@ -120,18 +118,9 @@ package y.controls
 			}
 		}
 
-		public function insertAllEmbbededImages() : void
+		public function addYChild(child : YSprite) : void
 		{
-			if (starlingInitialized)
-				DynamicTextureAtlas.insertAllEmbedds();
-			else
-			{
-				addEventListener("starlingInitialized", function(e : Object) : void
-				{
-					e;
-					DynamicTextureAtlas.insertAllEmbedds();
-				});
-			}
+			starlingRoot.addChild(child.getUIE());
 		}
 	}
 }

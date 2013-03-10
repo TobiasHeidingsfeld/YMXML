@@ -35,6 +35,11 @@ package y.controls
 			sprite.addChild(item.getUIE());
 		}
 		
+		public function removeAllChildren() : void
+		{
+			sprite.removeChildren();	
+		}
+		
 		public function get flatten() : Boolean
 		{
 			return sprite.isFlattened;
@@ -47,6 +52,7 @@ package y.controls
 			else 
 				sprite.unflatten();
 		}
+		
 
 	}
 }

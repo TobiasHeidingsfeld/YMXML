@@ -1,6 +1,5 @@
 package y.effect
 {
-	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 
