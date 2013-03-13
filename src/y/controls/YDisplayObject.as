@@ -1,13 +1,11 @@
 package y.controls
 {
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.filters.FragmentFilter;
 
 	import y.event.TranslatedEvent;
 	import y.util.Tween;
 
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 
 	[Event(name="enterFrame", type="flash.events.Event")]

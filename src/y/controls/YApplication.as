@@ -12,17 +12,20 @@ package y.controls
 	import flash.utils.setTimeout;
 
 	[DefaultProperty("mxmlContent")]
-	[Event(name="context3DCreate", type="flash.events.Event")]
-	[Event(name="starlingInitialized", type="flash.events.Event")]
+	[Event(name=context3DCreate, type="flash.events.Event")]
+	[Event(name=STARLING_INITIALIZED, type="flash.events.Event")]
 	public class YApplication extends flash.display.Sprite
 	{
-		public static var instance : YApplication;
+		public static const context3DCreate : String = "context3DCreate";
+		public static const STARLING_INITIALIZED : String = "starlingInitialized";
+		
+		public static var instance : YApplication;	
+		
 		public var starling : Starling;
 		public var starlingRoot : FeathersRoot;
 		public var theme : YTheme = new YTheme();
 		public var starlingInitialized : Boolean;
-		public var preCreatedTextureAtlas : Object;
-		public var preCreatedTextureAtlasInfo : Object;
+		public var stopCreation : Boolean;
 		private var fixedWidth : Number;
 		private var fixedHeight : Number;
 		private var _minPaddingTop : Number = 0;
@@ -52,14 +55,16 @@ package y.controls
 			starling.showStats = _showStats;
 
 			starlingInitialized = true;
-			dispatchEvent(new Event("starlingInitialized"));
+			dispatchEvent(new Event(STARLING_INITIALIZED));
 		}
 
-		private function contextCreated(event : Object) : void
+		public function contextCreated(event : Object) : void
 		{
+			if(stopCreation)
+				return;
 			setViewPort();
 
-			dispatchEvent(new Event("context3DCreate"));
+			dispatchEvent(new Event(context3DCreate));
 
 			if (theme)
 				theme.apply();

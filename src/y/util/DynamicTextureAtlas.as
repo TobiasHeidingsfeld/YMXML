@@ -1,17 +1,11 @@
 package y.util
 {
-	import ru.etcs.utils.getDefinitionNames;
-
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-
-	import y.controls.YApplication;
 
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.utils.ByteArray;
-	import flash.utils.describeType;
 	import flash.utils.getTimer;
 
 	[DefaultProperty("entries")]
@@ -19,6 +13,7 @@ package y.util
 	{
 		private const MAX_TEXTURE_WIDTH : int = 2048;
 		public static var instance : DynamicTextureAtlas = new DynamicTextureAtlas();
+		public var preCreatedBitmapData : BitmapData;
 		protected var _entries : Array = [];
 		protected var textureAtlas : TextureAtlas;
 		protected var texture : Texture;
@@ -28,28 +23,6 @@ package y.util
 		{
 			if (entries != null)
 				this._entries = entries;
-		}
-		
-		public function setATFData(bytes : ByteArray, entries : Array) : void
-		{
-			for each (var dta : DTAEntry in entries) 
-			{
-				addDTA(dta);
-			}
-			Texture.fromAtfData(bytes);			
-		}
-
-		public static function insertAllEmbedds() : void
-		{
-			for each (var defName : String in (getDefinitionNames(YApplication.instance.loaderInfo, false, true)))
-			{
-				var classDef : Class = YApplication.instance.loaderInfo.applicationDomain.getDefinition(defName) as Class;
-				var info : String = describeType(classDef) + "";
-				if (info.indexOf("mx.core::BitmapAsset") >= 0 && YApplication.instance.theme.backgroundImage != classDef && info.indexOf("NTA") == -1)
-				{
-					instance.addEmbeddedImage(classDef);
-				}
-			}
 		}
 
 		public function getTexture(name : String) : Texture
@@ -127,8 +100,7 @@ package y.util
 				return;
 			_addedEntries[entry.name] = true;
 			_entries.push(entry);
-			if (textureAtlas != null)
-				textureAtlas = null;
+			textureAtlas = null;
 		}
 
 		public function set entries(content : Array) : void
@@ -145,26 +117,23 @@ package y.util
 		private function createAtlas() : void
 		{
 			var start : int = getTimer();
-
-			var finalBitmap : BitmapData = generateBitmapData();
-
+			
 			// if(texture)
 			// texture.dispose();
+			
+			var finalBitmap : BitmapData = preCreatedBitmapData != null ? preCreatedBitmapData : generateBitmapData();
 			texture = Texture.fromBitmapData(finalBitmap, false, false);
+			
 			textureAtlas = new TextureAtlas(texture);
 			// trace("[YMXML] texture upload:" + (getTimer() - start) + "ms");
 
-			// var rect : Rectangle = new Rectangle();
 			for each (var entry : DTAEntry in _entries)
 			{
-				// rect.x = entry.atlasUsedRectangle.x * Starling.contentScaleFactor;
-				// rect.y = entry.atlasUsedRectangle.y * Starling.contentScaleFactor;
-				// rect.width = entry.atlasUsedRectangle.width * Starling.contentScaleFactor;
-				// rect.height = entry.atlasUsedRectangle.height * Starling.contentScaleFactor;
 				textureAtlas.addRegion(entry.name, entry.atlasUsedRectangle);
 			}
 			trace("[YMXML] Dynamic Texture Atlas:" + finalBitmap.width + "x" + finalBitmap.height + "px in " + (getTimer() - start) + "ms");
-			finalBitmap.dispose();
+			if(preCreatedBitmapData == null)
+				finalBitmap.dispose();
 		}
 	}
 }
