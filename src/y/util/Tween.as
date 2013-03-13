@@ -22,5 +22,10 @@ package y.util
 					Starling.juggler.add(me);
 				});
 		}
+
+		public function stop() : void
+		{
+			Starling.juggler.remove(this);
+		}
 	}
 }

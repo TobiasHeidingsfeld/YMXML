@@ -1,11 +1,11 @@
 package y.controls
 {
-	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.filters.FragmentFilter;
 
 	import y.event.TranslatedEvent;
+	import y.util.Tween;
 
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -64,23 +64,17 @@ package y.controls
 		public function setProperty(string : String, value : Number) : void
 		{
 			if (transitionDuration > 0)
-				animate(uie, string, value, transitionDuration);
+				animate(uie, string, value, transitionDuration, transitionDelay);
 			else
 				uie[string] = value;
 		}
 
-		public function animate(object : Object, string : String, value : Number, duration : int) : void
+		public function animate(object : Object, string : String, value : Number, duration : int, delay : int = 0) : Tween
 		{
 			var tween : Tween = new Tween(object, duration / 1000);
-			tween.delay = transitionDelay / 1000;
+			tween.delay = delay / 1000;
 			tween.animate(string, value);
-			if (Starling.juggler)
-				Starling.juggler.add(tween);
-			else
-				YApplication.instance.addEventListener(Event.CONTEXT3D_CREATE, function(event : Event) : void
-				{
-					Starling.juggler.add(tween);
-				});
+			return tween;
 		}
 
 		public function get x() : Number
