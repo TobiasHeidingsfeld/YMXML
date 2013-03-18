@@ -9,10 +9,10 @@ package y.util
 	import flash.events.Event;
 
 	public class Tween extends starling.animation.Tween
-	{
+	{	
 		public function Tween(target : Object, time : Number, transition : Object = "linear")
 		{
-			super(target, time, transition);
+			super(target, time / 1000, transition);
 			var me : IAnimatable = this;
 			if (Starling.juggler)
 				Starling.juggler.add(me);
@@ -22,6 +22,11 @@ package y.util
 					Starling.juggler.add(me);
 				});
 		}
+		
+		override public function set delay(value:Number):void 
+        { 
+            super.delay = value / 1000;
+        }
 
 		public function stop() : void
 		{

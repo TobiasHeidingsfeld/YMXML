@@ -67,10 +67,10 @@ package y.controls
 				uie[string] = value;
 		}
 
-		public function animate(object : Object, string : String, value : Number, duration : int, delay : int = 0) : Tween
+		public function animate(object : Object, string : String, value : Number, duration : int, delay : int = 0, transition : Object = "linear") : Tween
 		{
-			var tween : Tween = new Tween(object, duration / 1000);
-			tween.delay = delay / 1000;
+			var tween : Tween = new Tween(object, duration, transition);
+			tween.delay = delay;
 			tween.animate(string, value);
 			return tween;
 		}
