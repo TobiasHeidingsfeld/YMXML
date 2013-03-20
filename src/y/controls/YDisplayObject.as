@@ -1,9 +1,9 @@
 package y.controls
 {
 	import starling.display.DisplayObject;
-	import starling.filters.FragmentFilter;
 
 	import y.event.TranslatedEvent;
+	import y.filter.IYFilter;
 	import y.util.Tween;
 
 	import flash.events.EventDispatcher;
@@ -25,6 +25,7 @@ package y.controls
 		public var transitionDuration : int;
 		public var transitionDelay : int;
 		protected var uie : DisplayObject;
+		private var _filter : IYFilter;
 		
 		public function YDisplayObject()
 		{
@@ -235,14 +236,18 @@ package y.controls
 			setProperty("width", value);
 		}
 
-		public function get filter() : FragmentFilter
-		{
-			return uie.filter;
+		public function get filter() : IYFilter
+		{			
+			return _filter;
 		}
 
-		public function set filter(value : FragmentFilter) : void
+		public function set filter(value : IYFilter) : void
 		{
-			uie.filter = value;
+			_filter = value;
+			if(value)
+				uie.filter = value.filter;
+			else
+				uie.filter = null;
 		}
 	}
 }
