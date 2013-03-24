@@ -17,6 +17,7 @@ package y.theme
 	public class YTheme
 	{
 		public var defaultFont : Object;
+		public var defaultFontCff : Object;
 		public var backgroundImage : Object;
 		public var chromeColor : uint = 0xCCAACC;
 		public var scale : Number = 1;

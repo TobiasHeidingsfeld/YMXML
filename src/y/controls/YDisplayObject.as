@@ -1,5 +1,7 @@
 package y.controls
 {
+	import feathers.core.FeathersControl;
+
 	import starling.display.DisplayObject;
 
 	import y.event.TranslatedEvent;
@@ -26,10 +28,10 @@ package y.controls
 		public var transitionDelay : int;
 		protected var uie : DisplayObject;
 		private var _filter : IYFilter;
-		
+
 		public function YDisplayObject()
 		{
-			createUIE();			
+			createUIE();
 		}
 
 		protected function createUIE() : void
@@ -41,7 +43,7 @@ package y.controls
 		{
 			var translatedEvent : TranslatedEvent = TranslatedEvent.translatedEvents[type];
 			if (translatedEvent != null)
-				translatedEvent.create(listener, uie);				
+				translatedEvent.create(listener, uie);
 			else
 				super.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
@@ -58,6 +60,11 @@ package y.controls
 		public function getUIE() : DisplayObject
 		{
 			return uie;
+		}
+		
+		public function get feathersControl() : FeathersControl
+		{
+			return uie as FeathersControl;
 		}
 
 		public function setProperty(string : String, value : Number) : void
@@ -237,17 +244,43 @@ package y.controls
 		}
 
 		public function get filter() : IYFilter
-		{			
+		{
 			return _filter;
 		}
 
 		public function set filter(value : IYFilter) : void
 		{
 			_filter = value;
-			if(value)
+			if (value)
 				uie.filter = value.filter;
 			else
 				uie.filter = null;
+		}
+
+		public function get maxWidth() : Number
+		{
+			if(feathersControl)
+				return feathersControl.maxWidth;
+			return NaN;
+		}
+
+		public function set maxWidth(value : Number) : void
+		{
+			if(feathersControl)
+				feathersControl.maxWidth = value;
+		}
+		
+		public function get maxHeight() : Number
+		{
+			if(feathersControl)
+				return feathersControl.maxHeight;
+			return NaN;
+		}
+
+		public function set maxHeight(value : Number) : void
+		{
+			if(feathersControl)
+				feathersControl.maxHeight = value;
 		}
 	}
 }

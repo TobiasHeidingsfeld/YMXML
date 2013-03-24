@@ -7,13 +7,16 @@ package y.controls
 	{
 		override protected function createUIE() : void
 		{
-			uie = new TextInput();			
+			uie = new TextInput();					
 		}
 		
 		public function get t():TextInput { return uie as TextInput; }
 		
 		public function get text():String { return t.text; }
-		public function set text(value:String):void { t.text = value;} 
+		public function set text(value:String):void { t.text = value;}
+		
+		public function get maxChars():int { return t.maxChars; }
+		public function set maxChars(value:int):void { t.maxChars = value;} 
 
 		public function set fontSize(value : Number) : void	{ t.textEditorProperties["fontSize"] = value;}
 		

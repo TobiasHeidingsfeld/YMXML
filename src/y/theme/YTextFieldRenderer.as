@@ -22,21 +22,21 @@ package y.theme
 		public function set filters(value : Array) : void
 		{
 			_filters = value;
-			if(_textField)
-				_textField.filters = _filters;			
+			if(textField)
+				textField.filters = _filters;			
 		}
 				
 		override protected function initialize() : void
 		{
 			super.initialize();
-			_textField.filters = _filters;
+			textField.filters = _filters;
 		}
 		
 		private static const HELPER_MATRIX:Matrix = new Matrix();
 				
 		override protected function refreshSnapshot():void
 		{
-			if(this._textField.width == 0 || this._textField.height == 0)
+			if(this.textField.width == 0 || this.textField.height == 0)
 			{
 				return;
 			}
@@ -55,24 +55,24 @@ package y.theme
 			HELPER_MATRIX.identity();
 			HELPER_MATRIX.scale(Starling.contentScaleFactor, Starling.contentScaleFactor);
 			this._textSnapshotBitmapData.fillRect(this._textSnapshotBitmapData.rect, 0x00ff00ff);
-			this._textSnapshotBitmapData.draw(this._textField, HELPER_MATRIX);
-			if(!this._textSnapshot)
+			this._textSnapshotBitmapData.draw(this.textField, HELPER_MATRIX);
+			if(!this.textSnapshot)
 			{
-				this._textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
-				this.addChild(this._textSnapshot);
+				this.textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
+				this.addChild(this.textSnapshot);
 			}
 			else
 			{
 				if(this._needsNewBitmap)
 				{
-					this._textSnapshot.texture.dispose();
-					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
-					this._textSnapshot.readjustSize();
+					this.textSnapshot.texture.dispose();
+					this.textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
+					this.textSnapshot.readjustSize();
 				}
 				else
 				{
 					//this is faster if we haven't resized the bitmapdata
-					const texture:starling.textures.Texture = this._textSnapshot.texture;
+					const texture:starling.textures.Texture = this.textSnapshot.texture;
 					if(Starling.handleLostContext && texture is ConcreteTexture)
 					{
 						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);

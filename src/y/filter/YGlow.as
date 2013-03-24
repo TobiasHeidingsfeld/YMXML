@@ -7,7 +7,7 @@ package y.filter
 	{
 		private var blurFilter : BlurFilter;
 		
-		public function YGlow(color : uint = 0xffff00, alpha : Number = 1.0, blur : Number = 1.0, resolution : Number = 0.5)
+		public function YGlow(color : uint = 16711680, alpha : Number = 1.0, blur : Number = 1.0, resolution : Number = 0.5)
 		{
 			blurFilter = BlurFilter.createGlow(color, alpha, blur, resolution);
 		}
