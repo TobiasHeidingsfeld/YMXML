@@ -17,7 +17,7 @@ package y.controls
 		public function get t():Label { return uie as Label; }
 		
 		public function get text():String { return t.text; }
-		public function set text(value:String):void { t.text = value;}
+		public function set text(value:String):void { t.text = value + " ";}
 		
 		public function get wordWrap():Boolean { return t.textRendererProperties["wordWrap"]; }
 		public function set wordWrap(value:Boolean):void { t.textRendererProperties["wordWrap"] = value;}

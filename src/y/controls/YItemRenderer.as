@@ -1,7 +1,8 @@
 package y.controls
 {
 	import flash.events.Event;
-
+	
+	[Event(name="preDataChange", type="flash.events.Event")]
 	[Event(name="dataChange", type="flash.events.Event")]
 	public class YItemRenderer extends YSprite
 	{
@@ -16,6 +17,7 @@ package y.controls
 
 		public function set data(value : Object) : void
 		{
+			dispatchEvent(new Event("preDataChange"));
 			_data = value;
 			try
 			{
