@@ -30,7 +30,7 @@ package y.theme
 			backgroundDisplayObject.smoothing = true;
 			backgroundDisplayObject.scaleX = backgroundDisplayObject.scaleY = scale;
 			backgroundDisplayObject.x = (EnvironmentHelper.width - backgroundDisplayObject.width) / 2;
-			backgroundDisplayObject.y = (EnvironmentHelper.height - backgroundDisplayObject.height) / 2;
+			backgroundDisplayObject.y = (EnvironmentHelper.height - backgroundDisplayObject.height + YApplication.instance.minPaddingTop) / 2;
 			backgroundDisplayObject.cacheAsBitmap = rectMask.cacheAsBitmap = true;
 			YApplication.instance.addChild(backgroundDisplayObject);
 

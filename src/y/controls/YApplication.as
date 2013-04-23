@@ -24,7 +24,7 @@ package y.controls
 		public var starling : Starling;
 		public var starlingRoot : FeathersRoot;
 		public var theme : YTheme = new YTheme();
-		public var starlingInitialized : Boolean;
+		public var onStage : Boolean;
 		public var stopCreation : Boolean;
 		private var fixedWidth : Number;
 		private var fixedHeight : Number;
@@ -54,7 +54,7 @@ package y.controls
 			starling.start();
 			starling.showStats = _showStats;
 
-			starlingInitialized = true;
+			onStage = true;
 			dispatchEvent(new Event(STARLING_INITIALIZED));
 		}
 

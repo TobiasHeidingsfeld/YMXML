@@ -13,7 +13,7 @@ package y.util
 	{
 		public static function prepareImages() : void
 		{
-			if (YApplication.instance.starlingInitialized)
+			if (YApplication.instance.onStage)
 				insertAllEmbedds();
 			else
 				YApplication.instance.addEventListener(YApplication.STARLING_INITIALIZED, insertAllEmbedds);			
