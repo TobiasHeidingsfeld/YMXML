@@ -26,6 +26,7 @@ package y.util
 
 		public function set AtlasData(atlas : Object) : void
 		{
+			return;
 			if (EnvironmentHelper.isADL)
 				return;
 			YApplication.instance.stopCreation = true;
