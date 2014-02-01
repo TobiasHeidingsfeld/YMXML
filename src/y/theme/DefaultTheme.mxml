@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <theme:YTheme xmlns:fx="http://ns.adobe.com/mxml/2009"
               xmlns:theme="y.theme.*">
-	<fx:Script>
-		<![CDATA[
-			import y.controls.YButton;
-			import y.controls.YLabel;
-			import y.controls.YPanel;
-			import y.controls.YProgressBar;
-			import y.controls.YSlider;
-			import y.controls.YTextInput;
-		]]>
-	</fx:Script>
 	<theme:SkinSettings forClass="{YButton}">
 		<theme:SkinRoundRect skinName="defaultSkin"/>
 		<theme:SkinRoundRect skinName="hoverSkin"
