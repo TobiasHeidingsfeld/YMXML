@@ -33,8 +33,6 @@ package y.controls
 
 		public function YApplication()
 		{
-			if (instance)
-				trace("[YMXML]: YAPPLICATION SHOULD BE SINGLETON AND NOT CREATED MORE THEN ONCE");
 			instance = this;
 			if (stage)
 				initApplication(null);
