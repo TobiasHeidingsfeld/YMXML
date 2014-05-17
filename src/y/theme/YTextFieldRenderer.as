@@ -4,7 +4,6 @@ package y.theme
 
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.textures.ConcreteTexture;
 	import starling.textures.Texture;
 
 	import flash.display.BitmapData;
@@ -73,10 +72,10 @@ package y.theme
 				{
 					//this is faster if we haven't resized the bitmapdata
 					const texture:starling.textures.Texture = this.textSnapshot.texture;
-					if(Starling.handleLostContext && texture is ConcreteTexture)
-					{
-						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
-					}
+//					if(Starling.handleLostContext && texture is ConcreteTexture)
+//					{
+//						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
+//					}
 					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
 				}
 			}
